@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Methodology — New York City college campuses map</title>
+<style>
+  body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Helvetica,Arial,sans-serif;
+    color:#16181d;background:#f7f5f0;line-height:1.6;margin:0}
+  main{max-width:720px;margin:0 auto;padding:48px 24px 80px}
+  h1{font-size:26px;letter-spacing:-.01em;margin:0 0 6px}
+  .sub{color:#5b6473;margin:0 0 28px}
+  h2{font-size:16px;margin:30px 0 8px;border-bottom:1px solid #e3e6ea;padding-bottom:6px}
+  p,li{font-size:14.5px}
+  code{background:#eceae4;padding:1px 5px;border-radius:4px;font-size:13px}
+  a{color:#1f6feb}
+  table{border-collapse:collapse;width:100%;font-size:13.5px;margin:10px 0}
+  th,td{border:1px solid #e3e6ea;padding:6px 9px;text-align:left}
+  th{background:#eceae4}
+  .back{display:inline-block;margin-bottom:18px;font-size:13px;color:#5b6473;text-decoration:none}
+</style>
+</head>
+<body>
+<main>
+  <a class="back" href="index.html">&larr; Back to the map</a>
+  <h1>Methodology</h1>
+  <p class="sub">How the New York City college campuses map was built. Nothing here is a black box.</p>
+
+  <h2>Data source</h2>
+  <p>All enrollment and institution data come from the <a href="https://educationdata.urban.org/" target="_blank" rel="noopener">Urban Institute Education Data Portal</a>, which republishes the U.S. Department of Education's Integrated Postsecondary Education Data System (IPEDS). IPEDS collection is mandatory for any institution that participates in federal student-aid programs.</p>
+  <p>The map uses the <strong>fall 2022</strong> enrollment collection, the most recent year available in the portal's fall-enrollment race/sex table at the time of building (data pulled 2026-05-20). No paid services or API keys were used.</p>
+
+  <h2>Which institutions appear</h2>
+  <p>We pulled the IPEDS institutional directory for the five New York City county FIPS codes:</p>
+  <table>
+    <tr><th>Borough</th><th>County</th><th>FIPS</th></tr>
+    <tr><td>Bronx</td><td>Bronx County</td><td>36005</td></tr>
+    <tr><td>Brooklyn</td><td>Kings County</td><td>36047</td></tr>
+    <tr><td>Manhattan</td><td>New York County</td><td>36061</td></tr>
+    <tr><td>Queens</td><td>Queens County</td><td>36081</td></tr>
+    <tr><td>Staten Island</td><td>Richmond County</td><td>36085</td></tr>
+  </table>
+  <p>An institution is plotted only if it (1) has a New York City mailing address in the directory, (2) has valid latitude and longitude in IPEDS, and (3) reported at least one undergraduate or graduate student in fall 2022. Institutions that closed, report zero enrollment, or lack coordinates are excluded.</p>
+
+  <h2>Undergraduate vs. graduate / professional</h2>
+  <p>IPEDS classifies every student by level of study. We map two groups:</p>
+  <ul>
+    <li><strong>Undergraduate</strong> — IPEDS <code>level_of_study = 1</code>. Includes degree-seeking and non-degree-seeking undergraduates and continuing-education students counted at the undergraduate level.</li>
+    <li><strong>Graduate / professional</strong> — IPEDS <code>level_of_study = 2</code>. Since 2010 IPEDS folds first-professional programs (such as law, medicine and dentistry) into the graduate category, so this group includes master's, doctoral and professional-practice students.</li>
+  </ul>
+  <p>For each institution and level we requested the grand total with every disaggregating dimension set to "all" (<code>race = 99</code>, <code>sex = 99</code>, <code>ftpt = 99</code>, <code>class_level = 99</code>, <code>degree_seeking = 99</code>) to avoid double-counting across categories.</p>
+
+  <h2>Additional characteristics</h2>
+  <p>For each institution the detail card also shows:</p>
+  <ul>
+    <li><strong>Control type</strong> from the directory: public, private nonprofit, or private for-profit.</li>
+    <li><strong>Full-time share</strong> — full-time headcount (<code>ftpt = 1</code>) divided by total headcount, computed separately for undergraduate and graduate levels.</li>
+    <li><strong>Women share</strong> — students reported as women (<code>sex = 2</code>) divided by total, by level. IPEDS collects a binary sex field only.</li>
+    <li><strong>Race / ethnicity</strong> — the nine IPEDS categories (White; Black; Hispanic; Asian; American Indian or Alaska Native; Native Hawaiian or Pacific Islander; two or more races; U.S. nonresident; and unknown), summed across undergraduate and graduate students.</li>
+    <li><strong>Medical-degree flag</strong> — whether the directory marks the institution as granting a medical degree.</li>
+  </ul>
+
+  <h2>How the markers are drawn</h2>
+  <ul>
+    <li><strong>Circle area is proportional to total enrollment</strong> (radius scales with the square root of the headcount), so a campus with four times as many students draws a circle with roughly four times the area, not four times the radius.</li>
+    <li>In "student mix" mode the ring is split into a blue arc (undergraduate) and an orange arc (graduate / professional) proportional to each campus's enrollment.</li>
+    <li>In "control type" mode the ring is a single color for public, private nonprofit, or private for-profit.</li>
+  </ul>
+
+  <h2>Known limitations</h2>
+  <ul>
+    <li>Enrollment is a <strong>fall headcount</strong>, not full-time equivalent and not a 12-month unduplicated count, so a person enrolled at two campuses is counted at each.</li>
+    <li>A campus is placed at its IPEDS-reported main coordinate. Multi-site institutions (for example, a university with separate professional schools) are shown as a single point.</li>
+    <li>Mailing address determines borough. A handful of institutions administered from one borough may operate facilities in another.</li>
+    <li>Branch campuses and systems are reported as IPEDS lists them. The City University of New York and the State University of New York colleges appear as separate institutions, not as a single system.</li>
+    <li>Small counts may be suppressed or rounded in the underlying federal data.</li>
+  </ul>
+
+  <h2>Reproduce it</h2>
+  <p>The Python script <code>fetch_data.py</code> in this project pulls every figure directly from the Urban Institute API and writes <code>data/campuses.json</code>. Re-running it regenerates the dataset from scratch.</p>
+</main>
+</body>
+</html>

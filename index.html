@@ -1,0 +1,432 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>New York City college campuses: undergraduate and graduate enrollment</title>
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+<style>
+  :root{
+    --ink:#16181d; --muted:#5b6473; --line:#e3e6ea; --paper:#f7f5f0;
+    --ug:#1f6feb;      /* undergraduate */
+    --gr:#e0561d;      /* graduate / professional */
+    --pub:#2e7d57; --pnp:#7a4fcf; --pfp:#c0392b;
+    --panel:#ffffff;
+  }
+  *{box-sizing:border-box}
+  html,body{margin:0;height:100%}
+  body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Helvetica,Arial,sans-serif;color:var(--ink);background:var(--paper)}
+  #app{display:grid;grid-template-columns:340px 1fr;height:100vh}
+  /* ---- sidebar ---- */
+  #side{overflow-y:auto;border-right:1px solid var(--line);background:var(--panel);padding:20px 20px 40px}
+  h1{font-size:19px;line-height:1.25;margin:0 0 4px;letter-spacing:-.01em}
+  .sub{font-size:12.5px;color:var(--muted);margin:0 0 18px;line-height:1.4}
+  .stats{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:18px}
+  .stat{border:1px solid var(--line);border-radius:8px;padding:9px 10px;background:#fff}
+  .stat b{display:block;font-size:20px;font-variant-numeric:tabular-nums;letter-spacing:-.02em}
+  .stat span{font-size:11px;color:var(--muted)}
+  .stat.ug b{color:var(--ug)} .stat.gr b{color:var(--gr)}
+  .group{margin-bottom:16px}
+  .group h2{font-size:11px;text-transform:uppercase;letter-spacing:.07em;color:var(--muted);margin:0 0 8px}
+  label.chk{display:flex;align-items:center;gap:8px;font-size:13px;padding:3px 0;cursor:pointer}
+  label.chk input{accent-color:var(--ink)}
+  .swatch{width:11px;height:11px;border-radius:3px;display:inline-block;flex:none}
+  .seg{display:flex;border:1px solid var(--line);border-radius:8px;overflow:hidden}
+  .seg button{flex:1;border:0;background:#fff;padding:7px 4px;font-size:12px;cursor:pointer;color:var(--muted)}
+  .seg button.on{background:var(--ink);color:#fff}
+  input[type=range]{width:100%;accent-color:var(--ink)}
+  .rangeval{font-size:12px;color:var(--muted);font-variant-numeric:tabular-nums}
+  .legend-size{display:flex;align-items:flex-end;gap:14px;margin-top:6px}
+  .legend-size .c{display:flex;flex-direction:column;align-items:center;gap:3px;color:var(--muted);font-size:10.5px}
+  .legend-size circle{fill:none;stroke:#9aa3af;stroke-width:1.3}
+  .foot{font-size:11px;color:var(--muted);line-height:1.5;border-top:1px solid var(--line);padding-top:12px;margin-top:8px}
+  .foot a{color:var(--muted)}
+  /* ---- map ---- */
+  #map{height:100vh}
+  .leaflet-container{background:#dfe3e6}
+  /* ---- detail popup ---- */
+  .detail{font-family:inherit;width:268px}
+  .detail h3{margin:0 0 2px;font-size:15px;line-height:1.2}
+  .detail .meta{font-size:11.5px;color:var(--muted);margin-bottom:10px}
+  .detail .big{display:flex;gap:10px;margin-bottom:10px}
+  .detail .big div{flex:1;border-radius:7px;padding:7px 8px;color:#fff}
+  .detail .big .n{font-size:18px;font-weight:600;font-variant-numeric:tabular-nums;line-height:1}
+  .detail .big .l{font-size:10.5px;opacity:.9}
+  .bar{height:9px;border-radius:5px;overflow:hidden;display:flex;margin:7px 0 3px}
+  .bar i{display:block;height:100%}
+  .row{font-size:11.5px;color:var(--muted);display:flex;justify-content:space-between;margin:2px 0}
+  .row b{color:var(--ink);font-weight:600;font-variant-numeric:tabular-nums}
+  .secn{font-size:10.5px;text-transform:uppercase;letter-spacing:.06em;color:var(--muted);margin:11px 0 4px}
+  .race i{display:inline-block}
+  /* ---- summary charts ---- */
+  #charts{padding:34px 28px 70px;max-width:1200px;margin:0 auto}
+  #charts .head{margin-bottom:22px}
+  #charts h2.title{font-size:22px;letter-spacing:-.01em;margin:0 0 4px}
+  #charts .head p{margin:0;color:var(--muted);font-size:13px}
+  .cardgrid{display:grid;grid-template-columns:repeat(2,1fr);gap:18px}
+  .card{border:1px solid var(--line);border-radius:12px;background:#fff;padding:18px 18px 20px}
+  .card.wide{grid-column:1 / -1}
+  .card h3{font-size:14px;margin:0 0 3px}
+  .card .note{font-size:11.5px;color:var(--muted);margin:0 0 14px}
+  .subhead{font-size:10.5px;text-transform:uppercase;letter-spacing:.06em;color:var(--muted);margin:13px 0 2px}
+  .stackbar{height:26px;border-radius:6px;overflow:hidden;display:flex;width:100%}
+  .stackbar i{display:block;height:100%}
+  .keyrow{display:flex;flex-wrap:wrap;gap:4px 16px;margin-top:10px;font-size:11.5px;color:var(--muted)}
+  .keyrow span{display:flex;align-items:center;gap:5px;white-space:nowrap}
+  .keyrow b{color:var(--ink);font-variant-numeric:tabular-nums}
+  .dot{width:10px;height:10px;border-radius:3px;flex:none}
+  .rrow{display:grid;grid-template-columns:150px 1fr 108px;align-items:center;gap:10px;margin:7px 0;font-size:12.5px}
+  .rrow .lab{color:var(--ink);overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+  .rrow .track{background:#eef0f3;border-radius:5px;height:18px;overflow:hidden;display:flex}
+  .rrow .track i{height:100%}
+  .rrow .val{text-align:right;color:var(--muted);font-variant-numeric:tabular-nums}
+  .rrow .val b{color:var(--ink)}
+  @media(max-width:760px){
+    #app{grid-template-columns:1fr;grid-template-rows:auto 1fr}
+    #side{max-height:42vh} #map{height:58vh}
+    .cardgrid{grid-template-columns:1fr}
+    .rrow{grid-template-columns:88px 1fr 78px}
+  }
+</style>
+</head>
+<body>
+<div id="app">
+  <aside id="side">
+    <h1>New York City college campuses</h1>
+    <p class="sub">Fall 2022 enrollment by campus. Circle size shows total students; the ring shows the split between undergraduate and graduate or professional students.</p>
+
+    <div class="stats" id="stats"></div>
+
+    <div class="group">
+      <h2>Color campuses by</h2>
+      <div class="seg" id="colorby">
+        <button data-mode="mix" class="on">Student mix</button>
+        <button data-mode="control">Control type</button>
+      </div>
+    </div>
+
+    <div class="group" id="legend-mix">
+      <label class="chk"><span class="swatch" style="background:var(--ug)"></span> Undergraduate</label>
+      <label class="chk"><span class="swatch" style="background:var(--gr)"></span> Graduate / professional</label>
+    </div>
+    <div class="group" id="legend-control" style="display:none">
+      <label class="chk"><span class="swatch" style="background:var(--pub)"></span> Public</label>
+      <label class="chk"><span class="swatch" style="background:var(--pnp)"></span> Private nonprofit</label>
+      <label class="chk"><span class="swatch" style="background:var(--pfp)"></span> Private for-profit</label>
+    </div>
+
+    <div class="group">
+      <h2>Borough</h2>
+      <div id="boroughs"></div>
+    </div>
+
+    <div class="group">
+      <h2>Control</h2>
+      <div id="controls"></div>
+    </div>
+
+    <div class="group">
+      <h2>Minimum total students: <span class="rangeval" id="minval">0</span></h2>
+      <input type="range" id="minslider" min="0" max="20000" step="250" value="0" />
+    </div>
+
+    <div class="group">
+      <h2>Circle size = total students</h2>
+      <div class="legend-size" id="sizelegend"></div>
+    </div>
+
+    <p class="foot" id="foot"></p>
+  </aside>
+  <div id="map"></div>
+</div>
+
+<section id="charts">
+  <div class="head">
+    <h2 class="title">Summary charts</h2>
+    <p id="charts-note">Reflecting the campuses currently shown on the map.</p>
+  </div>
+  <div class="cardgrid">
+    <div class="card" id="c-level"></div>
+    <div class="card" id="c-ftpt"></div>
+    <div class="card wide" id="c-race"></div>
+    <div class="card" id="c-borough"></div>
+    <div class="card" id="c-control"></div>
+    <div class="card" id="c-gradshare"></div>
+    <div class="card" id="c-women"></div>
+    <div class="card wide" id="c-top"></div>
+  </div>
+</section>
+
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+<script>
+const COLORS = {
+  ug:"#1f6feb", gr:"#e0561d",
+  control:{"Public":"#2e7d57","Private nonprofit":"#7a4fcf","Private for-profit":"#c0392b","Other":"#888"}
+};
+const RACE_ORDER = ["White","Black","Hispanic","Asian","American Indian / Alaska Native",
+  "Native Hawaiian / Pacific Islander","Two or more races","U.S. Nonresident (international)","Race/ethnicity unknown"];
+const RACE_COLORS = {
+  "White":"#4c72b0","Black":"#dd8452","Hispanic":"#55a868","Asian":"#c44e52",
+  "American Indian / Alaska Native":"#8172b3","Native Hawaiian / Pacific Islander":"#937860",
+  "Two or more races":"#da8bc3","U.S. Nonresident (international)":"#8c8c8c","Race/ethnicity unknown":"#ccb974"};
+
+const map = L.map("map",{scrollWheelZoom:true}).setView([40.715,-73.98],11);
+L.tileLayer("https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png",{
+  attribution:'&copy; OpenStreetMap, &copy; CARTO', maxZoom:19, subdomains:"abcd"
+}).addTo(map);
+
+const layer = L.layerGroup().addTo(map);
+const fmt = n => n.toLocaleString("en-US");
+const pct = (a,b) => b>0 ? Math.round(a/b*100) : 0;
+
+let DATA=[], state={mode:"mix", boroughs:new Set(), controls:new Set(), min:0};
+
+function radius(total){ return Math.min(56, Math.max(4.5, Math.sqrt(total)*0.30)); } // area ∝ enrollment, capped
+
+function donutIcon(c){
+  const r = radius(c.total), sw = Math.max(3, r*0.42), R = r - sw/2, C = 2*Math.PI*R;
+  const ugFrac = c.total>0 ? c.undergrad/c.total : 0;
+  const box = r*2 + 4;
+  let ring;
+  if(state.mode==="control"){
+    const col = COLORS.control[c.control]||"#888";
+    ring = `<circle cx="${r+2}" cy="${r+2}" r="${R}" fill="none" stroke="${col}" stroke-width="${sw}"/>`;
+  } else {
+    const ugLen = C*ugFrac;
+    ring = `
+      <circle cx="${r+2}" cy="${r+2}" r="${R}" fill="none" stroke="${COLORS.gr}" stroke-width="${sw}"/>
+      <circle cx="${r+2}" cy="${r+2}" r="${R}" fill="none" stroke="${COLORS.ug}" stroke-width="${sw}"
+        stroke-dasharray="${ugLen} ${C-ugLen}" transform="rotate(-90 ${r+2} ${r+2})"/>`;
+  }
+  const svg = `<svg width="${box}" height="${box}" viewBox="0 0 ${box} ${box}">
+    <circle cx="${r+2}" cy="${r+2}" r="${R}" fill="#ffffff" fill-opacity="0.32"/>
+    ${ring}</svg>`;
+  return L.divIcon({html:svg, className:"campus-donut", iconSize:[box,box], iconAnchor:[box/2,box/2]});
+}
+
+function raceBar(race, total){
+  if(!total) return "";
+  let segs = RACE_ORDER.filter(k=>race[k]>0).map(k=>{
+    const w = race[k]/total*100;
+    return `<i style="width:${w}%;background:${RACE_COLORS[k]}" title="${k}: ${fmt(race[k])} (${Math.round(w)}%)"></i>`;
+  }).join("");
+  return `<div class="bar">${segs}</div>`;
+}
+
+function popFtRow(label,ft,pt){
+  const t=ft+pt; if(!t) return "";
+  return `<div class="row" style="display:block;margin-top:6px">
+    <span style="color:var(--ink)">${label}</span>
+    <div class="bar"><i style="width:${ft/t*100}%;background:#2e7d57"></i><i style="width:${pt/t*100}%;background:#cfe3d8"></i></div>
+    <span>${fmt(ft)} full-time &middot; ${fmt(pt)} part-time (${Math.round(ft/t*100)}% full-time)</span>
+  </div>`;
+}
+
+function detailHTML(c){
+  const ugP=pct(c.undergrad,c.total), grP=100-ugP;
+  const allRace={}; RACE_ORDER.forEach(k=>allRace[k]=(c.ug_race[k]||0)+(c.gr_race[k]||0));
+  const ugW=pct(c.ug_women,c.undergrad), grW=pct(c.gr_women,c.grad);
+  return `<div class="detail">
+    <h3>${c.name}</h3>
+    <div class="meta">${c.borough} &middot; ${c.control}${c.medical_degree?" &middot; grants medical degrees":""}</div>
+    <div class="big">
+      <div style="background:${COLORS.ug}"><div class="n">${fmt(c.undergrad)}</div><div class="l">Undergraduate (${ugP}%)</div></div>
+      <div style="background:${COLORS.gr}"><div class="n">${fmt(c.grad)}</div><div class="l">Graduate / prof. (${grP}%)</div></div>
+    </div>
+    <div class="row"><span>Total students</span><b>${fmt(c.total)}</b></div>
+
+    <div class="secn">Full-time / part-time</div>
+    ${popFtRow("Undergraduate",c.ug_ft,c.ug_pt)}
+    ${c.grad>0?popFtRow("Graduate / professional",c.gr_ft,c.gr_pt):""}
+    <div class="row" style="margin-top:5px;gap:14px;justify-content:flex-start">
+      <span><i style="display:inline-block;width:9px;height:9px;border-radius:2px;background:#2e7d57;margin-right:4px"></i>Full-time</span>
+      <span><i style="display:inline-block;width:9px;height:9px;border-radius:2px;background:#cfe3d8;margin-right:4px"></i>Part-time</span>
+    </div>
+
+    <div class="secn">Women share</div>
+    <div class="row"><span>Undergraduate</span><b>${ugW}% women</b></div>
+    ${c.grad>0?`<div class="row"><span>Graduate / professional</span><b>${grW}% women</b></div>`:""}
+
+    <div class="secn">Race / ethnicity (all students)</div>
+    ${raceBar(allRace,c.total)}
+    <div class="row" style="flex-wrap:wrap;gap:2px 10px;margin-top:5px">
+      ${RACE_ORDER.filter(k=>allRace[k]>0).map(k=>
+        `<span style="white-space:nowrap"><i style="display:inline-block;width:9px;height:9px;border-radius:2px;background:${RACE_COLORS[k]};margin-right:4px"></i>${k.replace(' / Alaska Native','').replace(' (international)','')} ${pct(allRace[k],c.total)}%</span>`).join("")}
+    </div>
+    ${c.url?`<div class="row" style="margin-top:8px"><a href="https://${c.url.replace(/^https?:\/\//,'')}" target="_blank" rel="noopener">${c.url.replace(/\/$/,'')}</a></div>`:""}
+  </div>`;
+}
+
+function passes(c){
+  return state.boroughs.has(c.borough) && state.controls.has(c.control) && c.total>=state.min;
+}
+
+/* ---------- summary charts ---------- */
+const sum=(arr,f)=>arr.reduce((s,c)=>s+f(c),0);
+const card=(title,note,body)=>`<h3>${title}</h3><p class="note">${note}</p>${body}`;
+function stackHTML(segs){
+  const t=segs.reduce((s,x)=>s+x.value,0)||1;
+  return segs.filter(s=>s.value>0).map(s=>
+    `<i style="width:${s.value/t*100}%;background:${s.color}" title="${s.label}: ${fmt(s.value)} (${Math.round(s.value/t*100)}%)"></i>`).join("");
+}
+function rankRows(items,maxTotal,valFmt){
+  return items.map(it=>{
+    const w=maxTotal>0?it.total/maxTotal*100:0;
+    const ugf=it.total>0?it.undergrad/it.total:0;
+    return `<div class="rrow"><span class="lab" title="${it.label}">${it.label}</span>
+      <div class="track">
+        <i style="width:${w*ugf}%;background:${COLORS.ug}"></i>
+        <i style="width:${w*(1-ugf)}%;background:${COLORS.gr}"></i>
+      </div><span class="val">${valFmt(it)}</span></div>`;
+  }).join("");
+}
+function twoToneRow(label,a,b,colA,colB,valLabel){
+  const t=a+b||1;
+  return `<div class="rrow"><span class="lab">${label}</span>
+    <div class="track"><i style="width:${a/t*100}%;background:${colA}"></i><i style="width:${b/t*100}%;background:${colB}"></i></div>
+    <span class="val"><b>${Math.round(a/t*100)}%</b> ${valLabel}</span></div>`;
+}
+
+function renderCharts(shown){
+  const note=document.getElementById("charts-note");
+  if(!shown.length){ note.textContent="No campuses match the current filters.";
+    ["c-level","c-ftpt","c-race","c-borough","c-control","c-gradshare","c-women","c-top"].forEach(id=>document.getElementById(id).innerHTML=""); return; }
+  note.textContent=`Reflecting the ${fmt(shown.length)} campuses currently shown on the map (${fmt(sum(shown,c=>c.total))} students).`;
+
+  const tUg=sum(shown,c=>c.undergrad), tGr=sum(shown,c=>c.grad), tAll=tUg+tGr;
+
+  // Students by level
+  document.getElementById("c-level").innerHTML=card("Students by level","Undergraduate vs. graduate / professional",
+    `<div class="stackbar">${stackHTML([{label:"Undergraduate",value:tUg,color:COLORS.ug},{label:"Graduate / professional",value:tGr,color:COLORS.gr}])}</div>
+     <div class="keyrow">
+       <span><i class="dot" style="background:${COLORS.ug}"></i>Undergraduate <b>${fmt(tUg)} (${pct(tUg,tAll)}%)</b></span>
+       <span><i class="dot" style="background:${COLORS.gr}"></i>Graduate / professional <b>${fmt(tGr)} (${pct(tGr,tAll)}%)</b></span>
+     </div>`);
+
+  // Full-time vs part-time (overall, by level, by control type)
+  const ugFt=sum(shown,c=>c.ug_ft),ugPt=sum(shown,c=>c.ug_pt),grFt=sum(shown,c=>c.gr_ft),grPt=sum(shown,c=>c.gr_pt);
+  const allFt=ugFt+grFt, allPt=ugPt+grPt;
+  const ftCtrl=["Public","Private nonprofit","Private for-profit"].map(ct=>{
+    const cs=shown.filter(c=>c.control===ct);
+    return {label:ct,ft:sum(cs,c=>c.ug_ft+c.gr_ft),pt:sum(cs,c=>c.ug_pt+c.gr_pt)};
+  }).filter(x=>x.ft+x.pt>0);
+  const ftr=(l,f,p)=>twoToneRow(l,f,p,"#2e7d57","#cfe3d8","full-time");
+  document.getElementById("c-ftpt").innerHTML=card("Full-time vs. part-time","Share of students enrolled full-time",
+    ftr("All students",allFt,allPt)
+    +`<div class="subhead">By level</div>`+ftr("Undergraduate",ugFt,ugPt)+ftr("Graduate / prof.",grFt,grPt)
+    +`<div class="subhead">By control type</div>`+ftCtrl.map(x=>ftr(x.label,x.ft,x.pt)).join("")
+    +`<div class="keyrow"><span><i class="dot" style="background:#2e7d57"></i>Full-time</span><span><i class="dot" style="background:#cfe3d8"></i>Part-time</span></div>`);
+
+  // Race / ethnicity
+  const race={}; RACE_ORDER.forEach(k=>race[k]=sum(shown,c=>(c.ug_race[k]||0)+(c.gr_race[k]||0)));
+  const raceSegs=RACE_ORDER.map(k=>({label:k,value:race[k],color:RACE_COLORS[k]}));
+  document.getElementById("c-race").innerHTML=card("Race and ethnicity of all students","Undergraduate and graduate / professional combined, fall 2022",
+    `<div class="stackbar">${stackHTML(raceSegs)}</div>
+     <div class="keyrow">${raceSegs.filter(s=>s.value>0).map(s=>`<span><i class="dot" style="background:${s.color}"></i>${s.label} <b>${pct(s.value,tAll)}%</b></span>`).join("")}</div>`);
+
+  // By borough (magnitude + level split)
+  const boroughs=[...new Set(shown.map(c=>c.borough))];
+  let bAgg=boroughs.map(b=>{const cs=shown.filter(c=>c.borough===b);
+    return {label:b,undergrad:sum(cs,c=>c.undergrad),grad:sum(cs,c=>c.grad),total:sum(cs,c=>c.total)};}).sort((a,b)=>b.total-a.total);
+  const bMax=Math.max(...bAgg.map(b=>b.total),1);
+  document.getElementById("c-borough").innerHTML=card("Students by borough","Bar length = total students; color = level",
+    rankRows(bAgg,bMax,it=>`<b>${fmt(it.total)}</b> · ${pct(it.total,tAll)}%`)+
+    `<div class="keyrow"><span><i class="dot" style="background:${COLORS.ug}"></i>Undergraduate</span><span><i class="dot" style="background:${COLORS.gr}"></i>Graduate / prof.</span></div>`);
+
+  // By control type
+  const ctrls=["Public","Private nonprofit","Private for-profit"];
+  let cAgg=ctrls.map(ct=>{const cs=shown.filter(c=>c.control===ct);
+    return {label:ct,undergrad:sum(cs,c=>c.undergrad),grad:sum(cs,c=>c.grad),total:sum(cs,c=>c.total),n:cs.length};}).filter(x=>x.total>0);
+  const cMax=Math.max(...cAgg.map(c=>c.total),1);
+  document.getElementById("c-control").innerHTML=card("Students by control type","Bar length = total students; color = level",
+    rankRows(cAgg,cMax,it=>`<b>${fmt(it.total)}</b> · ${pct(it.total,tAll)}%`)+
+    `<div class="keyrow"><span><i class="dot" style="background:${COLORS.ug}"></i>Undergraduate</span><span><i class="dot" style="background:${COLORS.gr}"></i>Graduate / prof.</span></div>`);
+
+  // Graduate share by borough
+  document.getElementById("c-gradshare").innerHTML=card("Graduate / professional share by borough","Percent of each borough's students at the graduate level",
+    bAgg.slice().sort((a,b)=>(b.grad/b.total)-(a.grad/a.total)).map(b=>{
+      const v=pct(b.grad,b.total);
+      return `<div class="rrow"><span class="lab">${b.label}</span><div class="track"><i style="width:${v}%;background:${COLORS.gr}"></i></div><span class="val"><b>${v}%</b></span></div>`;
+    }).join(""));
+
+  // Women share by level
+  const ugW=sum(shown,c=>c.ug_women),ugM=sum(shown,c=>c.ug_men),grW=sum(shown,c=>c.gr_women),grM=sum(shown,c=>c.gr_men);
+  document.getElementById("c-women").innerHTML=card("Women share by level","Share of students reported as women",
+    twoToneRow("Undergraduate",ugW,ugM,"#c44e92","#4c72b0","women")
+     +twoToneRow("Graduate / prof.",grW,grM,"#c44e92","#4c72b0","women")
+     +`<div class="keyrow"><span><i class="dot" style="background:#c44e92"></i>Women</span><span><i class="dot" style="background:#4c72b0"></i>Men</span></div>`);
+
+  // Largest campuses
+  const top=shown.slice(0,12).map(c=>({label:c.name,undergrad:c.undergrad,grad:c.grad,total:c.total}));
+  const tMax=Math.max(...top.map(t=>t.total),1);
+  document.getElementById("c-top").innerHTML=card("Largest campuses by total enrollment","Top 12 of the campuses shown; color = level",
+    rankRows(top,tMax,it=>`<b>${fmt(it.total)}</b>`)+
+    `<div class="keyrow"><span><i class="dot" style="background:${COLORS.ug}"></i>Undergraduate</span><span><i class="dot" style="background:${COLORS.gr}"></i>Graduate / prof.</span></div>`);
+}
+
+function render(){
+  layer.clearLayers();
+  const shown = DATA.filter(passes).sort((a,b)=>b.total-a.total);
+  shown.forEach(c=>{
+    L.marker([c.lat,c.lon],{icon:donutIcon(c)})
+      .bindPopup(detailHTML(c),{maxWidth:300})
+      .bindTooltip(`${c.name} — ${fmt(c.total)} students`)
+      .addTo(layer);
+  });
+  // stats
+  const sUg=shown.reduce((s,c)=>s+c.undergrad,0), sGr=shown.reduce((s,c)=>s+c.grad,0);
+  document.getElementById("stats").innerHTML=`
+    <div class="stat"><b>${fmt(shown.length)}</b><span>campuses shown</span></div>
+    <div class="stat"><b>${fmt(sUg+sGr)}</b><span>total students</span></div>
+    <div class="stat ug"><b>${fmt(sUg)}</b><span>undergraduate</span></div>
+    <div class="stat gr"><b>${fmt(sGr)}</b><span>graduate / prof.</span></div>`;
+  renderCharts(shown);
+}
+
+function buildFilters(){
+  const boroughs=[...new Set(DATA.map(c=>c.borough))].sort();
+  const controls=["Public","Private nonprofit","Private for-profit"];
+  boroughs.forEach(b=>state.boroughs.add(b));
+  controls.forEach(c=>state.controls.add(c));
+
+  document.getElementById("boroughs").innerHTML=boroughs.map(b=>
+    `<label class="chk"><input type="checkbox" data-b="${b}" checked> ${b}</label>`).join("");
+  document.getElementById("controls").innerHTML=controls.map(c=>
+    `<label class="chk"><span class="swatch" style="background:${COLORS.control[c]}"></span><input type="checkbox" data-c="${c}" checked> ${c}</label>`).join("");
+
+  document.querySelectorAll('[data-b]').forEach(el=>el.onchange=e=>{
+    e.target.checked?state.boroughs.add(e.target.dataset.b):state.boroughs.delete(e.target.dataset.b); render();});
+  document.querySelectorAll('[data-c]').forEach(el=>el.onchange=e=>{
+    e.target.checked?state.controls.add(e.target.dataset.c):state.controls.delete(e.target.dataset.c); render();});
+
+  document.querySelectorAll('#colorby button').forEach(btn=>btn.onclick=()=>{
+    document.querySelectorAll('#colorby button').forEach(b=>b.classList.remove('on'));
+    btn.classList.add('on'); state.mode=btn.dataset.mode;
+    document.getElementById('legend-mix').style.display = state.mode==='mix'?'block':'none';
+    document.getElementById('legend-control').style.display = state.mode==='control'?'block':'none';
+    render();
+  });
+
+  const slider=document.getElementById("minslider");
+  slider.oninput=e=>{state.min=+e.target.value; document.getElementById("minval").textContent=fmt(state.min); render();};
+
+  // size legend
+  const sizes=[1000,10000,30000];
+  document.getElementById("sizelegend").innerHTML=sizes.map(s=>{
+    const r=radius(s),box=r*2+2;
+    return `<div class="c"><svg width="${box}" height="${box}"><circle cx="${r+1}" cy="${r+1}" r="${r}"/></svg><span>${fmt(s)}</span></div>`;
+  }).join("");
+}
+
+fetch("data/campuses.json").then(r=>r.json()).then(d=>{
+  DATA=d.campuses;
+  buildFilters();
+  render();
+  document.getElementById("foot").innerHTML=
+    `Source: Urban Institute Education Data Portal (IPEDS fall ${d.year} enrollment). `+
+    `${d.count} degree- and non-degree-granting institutions with a New York City address and reported enrollment. `+
+    `See <a href="methodology.html">methodology</a>.`;
+});
+</script>
+</body>
+</html>
