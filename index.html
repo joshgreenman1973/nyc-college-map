@@ -31,7 +31,7 @@
   #topbar::after{content:"";position:absolute;left:0;right:0;bottom:-1px;height:2px;background:linear-gradient(90deg,var(--ug) 0%,var(--ug) 50%,var(--gr) 50%,var(--gr) 100%)}
   #topbar .brand{display:flex;align-items:center;gap:13px;min-width:0;font-size:25px;font-weight:800;letter-spacing:-.025em;line-height:1.05;color:var(--ink)}
   #topbar .brand .txt{overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
-  #topbar .brand .mark{width:20px;height:20px;border-radius:5px;background:linear-gradient(135deg,var(--ug),var(--gr));flex:none;box-shadow:0 2px 5px rgba(31,111,235,.4)}
+  #topbar .brand .mark{flex:none;display:block}
   #tabs{display:flex;gap:3px;background:var(--panel2);border:1px solid var(--line);border-radius:999px;padding:3px}
   #tabs button{border:0;background:transparent;color:var(--muted);font-family:var(--sans);font-size:13px;font-weight:600;padding:7px 17px;border-radius:999px;cursor:pointer;transition:color .18s,background .18s}
   #tabs button:hover{color:var(--ink)}
@@ -142,7 +142,7 @@
 </head>
 <body>
 <header id="topbar">
-  <div class="brand"><span class="mark"></span><span class="txt">New York City college campuses</span></div>
+  <div class="brand"><svg class="mark" width="24" height="24" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="8" fill="none" stroke="#e0561d" stroke-width="4.5"/><circle cx="12" cy="12" r="8" fill="none" stroke="#1f6feb" stroke-width="4.5" stroke-dasharray="36 14.3" transform="rotate(-90 12 12)" stroke-linecap="butt"/></svg><span class="txt">New York City college campuses</span></div>
   <nav id="tabs">
     <button data-view="map" class="on">Map</button>
     <button data-view="charts">Summary charts</button>
