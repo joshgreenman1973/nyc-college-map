@@ -166,6 +166,15 @@
     </div>
 
     <div class="group">
+      <h2>Fully-online students</h2>
+      <div class="seg" id="onlineby">
+        <button data-online="incl" class="on">Include</button>
+        <button data-online="excl">Exclude</button>
+      </div>
+      <p id="online-note" style="font-size:11px;color:var(--muted);margin:7px 0 0;line-height:1.45">Circle size counts everyone enrolled, including students who study entirely online.</p>
+    </div>
+
+    <div class="group">
       <h2>Color campuses by</h2>
       <div class="seg" id="colorby">
         <button data-mode="mix" class="on">Student mix</button>
@@ -305,11 +314,20 @@ function renderBranch(){
 }
 const pct = (a,b) => b>0 ? Math.round(a/b*100) : 0;
 
-let DATA=[], DEGREE_FIELDS=null, state={mode:"mix", level:"all", boroughs:new Set(), controls:new Set(), min:0};
+let DATA=[], DEGREE_FIELDS=null, state={mode:"mix", level:"all", online:"incl", boroughs:new Set(), controls:new Set(), min:0};
 
-// the student count currently being mapped, given the level toggle
-function meas(c){ return state.level==="ug" ? c.undergrad : state.level==="gr" ? c.grad : c.total; }
-const levelWord = () => state.level==="ug" ? "undergraduates" : state.level==="gr" ? "graduate students" : "total students";
+// undergrad/grad counts for a campus, dropping fully-online students when the
+// "exclude" toggle is on (in-person footprint = total minus exclusively online)
+function parts(c){
+  if(state.online==="excl") return {ug:Math.max(0,c.undergrad-(c.o_ug_exc||0)), gr:Math.max(0,c.grad-(c.o_gr_exc||0))};
+  return {ug:c.undergrad, gr:c.grad};
+}
+// the student count currently being mapped, given the level + online toggles
+function meas(c){ const p=parts(c); return state.level==="ug" ? p.ug : state.level==="gr" ? p.gr : p.ug+p.gr; }
+function levelWord(){
+  const base = state.level==="ug" ? "undergraduates" : state.level==="gr" ? "graduate students" : "total students";
+  return state.online==="excl" ? "in-person " + base.replace("total ","") : base;
+}
 
 function radius(total){ return Math.min(56, Math.max(4.5, Math.sqrt(total)*0.30)); } // area ∝ enrollment, capped
 
@@ -325,7 +343,8 @@ function donutIcon(c){
   } else if(state.level==="gr"){
     ring = `<circle cx="${cx}" cy="${cx}" r="${R}" fill="none" stroke="${COLORS.gr}" stroke-width="${sw}"/>`;
   } else {
-    const ugLen = (c.total>0 ? c.undergrad/c.total : 0) * C;
+    const p=parts(c), pt=p.ug+p.gr;
+    const ugLen = (pt>0 ? p.ug/pt : 0) * C;
     ring = `<circle cx="${cx}" cy="${cx}" r="${R}" fill="none" stroke="${COLORS.gr}" stroke-width="${sw}"/>
       <circle cx="${cx}" cy="${cx}" r="${R}" fill="none" stroke="${COLORS.ug}" stroke-width="${sw}"
         stroke-dasharray="${ugLen} ${C-ugLen}" transform="rotate(-90 ${cx} ${cx})"/>`;
@@ -354,6 +373,15 @@ function popFtRow(label,ft,pt){
   </div>`;
 }
 
+function popOnlineRow(label,exc,som,non){
+  const t=exc+som+non; if(!t) return "";
+  return `<div class="row" style="display:block;margin-top:6px">
+    <span style="color:var(--ink)">${label}</span>
+    <div class="bar"><i style="width:${non/t*100}%;background:#2f6f4f"></i><i style="width:${som/t*100}%;background:#d6a44d"></i><i style="width:${exc/t*100}%;background:#b5462f"></i></div>
+    <span>${Math.round(exc/t*100)}% fully online &middot; ${Math.round(som/t*100)}% some &middot; ${Math.round(non/t*100)}% none</span>
+  </div>`;
+}
+
 function detailHTML(c){
   const ugP=pct(c.undergrad,c.total), grP=100-ugP;
   const allRace={}; RACE_ORDER.forEach(k=>allRace[k]=(c.ug_race[k]||0)+(c.gr_race[k]||0));
@@ -378,6 +406,16 @@ function detailHTML(c){
     <div class="secn">Women share</div>
     <div class="row"><span>Undergraduate</span><b>${ugW}% women</b></div>
     ${c.grad>0?`<div class="row"><span>Graduate / professional</span><b>${grW}% women</b></div>`:""}
+
+    ${((c.o_ug_exc||0)+(c.o_ug_som||0)+(c.o_ug_non||0)+(c.o_gr_exc||0))>0?`
+    <div class="secn">Online / in person</div>
+    ${popOnlineRow("Undergraduate",c.o_ug_exc||0,c.o_ug_som||0,c.o_ug_non||0)}
+    ${c.grad>0?popOnlineRow("Graduate / professional",c.o_gr_exc||0,c.o_gr_som||0,c.o_gr_non||0):""}
+    <div class="row" style="margin-top:5px;gap:12px;justify-content:flex-start;flex-wrap:wrap">
+      <span><i style="display:inline-block;width:9px;height:9px;border-radius:2px;background:#2f6f4f;margin-right:4px"></i>No online</span>
+      <span><i style="display:inline-block;width:9px;height:9px;border-radius:2px;background:#d6a44d;margin-right:4px"></i>Some</span>
+      <span><i style="display:inline-block;width:9px;height:9px;border-radius:2px;background:#b5462f;margin-right:4px"></i>Fully online</span>
+    </div>`:""}
 
     <div class="secn">Race / ethnicity (all students)</div>
     ${raceBar(allRace,c.total)}
@@ -506,14 +544,14 @@ function render(){
       .bindTooltip(`${c.name} — ${fmt(meas(c))} ${levelWord()}`)
       .addTo(layer);
   });
-  // stats
-  const sUg=sum(shown,c=>c.undergrad), sGr=sum(shown,c=>c.grad), sMeas=sum(shown,c=>meas(c));
-  const measLabel = state.level==="ug" ? "undergraduates shown" : state.level==="gr" ? "graduate students shown" : "total students";
+  // stats (reflect the online toggle)
+  const sUg=sum(shown,c=>parts(c).ug), sGr=sum(shown,c=>parts(c).gr), sMeas=sum(shown,c=>meas(c));
+  const ip = state.online==="excl" ? "in-person " : "";
   document.getElementById("stats").innerHTML=`
     <div class="stat"><b>${fmt(shown.length)}</b><span>campuses shown</span></div>
-    <div class="stat"><b>${fmt(sMeas)}</b><span>${measLabel}</span></div>
-    <div class="stat ug"><b>${fmt(sUg)}</b><span>undergraduate</span></div>
-    <div class="stat gr"><b>${fmt(sGr)}</b><span>graduate / prof.</span></div>`;
+    <div class="stat"><b>${fmt(sMeas)}</b><span>${levelWord()} shown</span></div>
+    <div class="stat ug"><b>${fmt(sUg)}</b><span>${ip}undergraduate</span></div>
+    <div class="stat gr"><b>${fmt(sGr)}</b><span>${ip}graduate / prof.</span></div>`;
   document.getElementById("sizehdr").textContent = "Circle size = " + levelWord();
   renderBranch();
   renderCharts(shown);
@@ -546,6 +584,15 @@ function buildFilters(){
   document.querySelectorAll('#levelby button').forEach(btn=>btn.onclick=()=>{
     document.querySelectorAll('#levelby button').forEach(b=>b.classList.toggle('on', b===btn));
     state.level=btn.dataset.level; render();
+  });
+
+  document.querySelectorAll('#onlineby button').forEach(btn=>btn.onclick=()=>{
+    document.querySelectorAll('#onlineby button').forEach(b=>b.classList.toggle('on', b===btn));
+    state.online=btn.dataset.online;
+    document.getElementById('online-note').textContent = state.online==="excl"
+      ? "Circle size now counts only students who attend at least some classes in person; fully-online students are dropped."
+      : "Circle size counts everyone enrolled, including students who study entirely online.";
+    render();
   });
 
   // tab switching (Map / Summary charts) — avoids the map trapping the scroll wheel
@@ -640,7 +687,7 @@ function renderCities(){
     rows+`<div class="keyrow"><span><i class="dot" style="background:${COLORS.ug}"></i>Undergraduate</span><span><i class="dot" style="background:${COLORS.gr}"></i>Graduate / prof.</span></div>`);
 }
 
-fetch("data/campuses.json?v=20260521b").then(r=>r.json()).then(d=>{
+fetch("data/campuses.json?v=20260521c").then(r=>r.json()).then(d=>{
   DATA=d.campuses;
   DEGREE_FIELDS=d.degree_fields;
   CITY_DATA=d.city_comparison;

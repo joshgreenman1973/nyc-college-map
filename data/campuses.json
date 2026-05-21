@@ -48,7 +48,13 @@
         "U.S. Nonresident (international)": 12161,
         "Race/ethnicity unknown": 1293,
         "White": 8256
-      }
+      },
+      "o_ug_exc": 263,
+      "o_ug_som": 6926,
+      "o_ug_non": 22212,
+      "o_gr_exc": 3797,
+      "o_gr_som": 7314,
+      "o_gr_non": 18632
     },
     {
       "unitid": 190150,
@@ -95,7 +101,13 @@
         "U.S. Nonresident (international)": 12377,
         "Race/ethnicity unknown": 1083,
         "White": 6183
-      }
+      },
+      "o_ug_exc": 25,
+      "o_ug_som": 180,
+      "o_ug_non": 8889,
+      "o_gr_exc": 1086,
+      "o_gr_som": 3662,
+      "o_gr_non": 21942
     },
     {
       "unitid": 190594,
@@ -140,7 +152,13 @@
         "Native Hawaiian / Pacific Islander": 11,
         "U.S. Nonresident (international)": 183,
         "White": 2546
-      }
+      },
+      "o_ug_exc": 282,
+      "o_ug_som": 6311,
+      "o_ug_non": 10663,
+      "o_gr_exc": 353,
+      "o_gr_som": 1571,
+      "o_gr_non": 3790
     },
     {
       "unitid": 190512,
@@ -185,7 +203,13 @@
         "Native Hawaiian / Pacific Islander": 1,
         "U.S. Nonresident (international)": 712,
         "White": 1073
-      }
+      },
+      "o_ug_exc": 779,
+      "o_ug_som": 7223,
+      "o_ug_non": 7894,
+      "o_gr_exc": 707,
+      "o_gr_som": 1869,
+      "o_gr_non": 1382
     },
     {
       "unitid": 195809,
@@ -232,7 +256,13 @@
         "U.S. Nonresident (international)": 311,
         "Race/ethnicity unknown": 50,
         "White": 1905
-      }
+      },
+      "o_ug_exc": 282,
+      "o_ug_som": 6079,
+      "o_ug_non": 9291,
+      "o_gr_exc": 768,
+      "o_gr_som": 986,
+      "o_gr_non": 2257
     },
     {
       "unitid": 190521,
@@ -268,7 +298,13 @@
         "U.S. Nonresident (international)": 1043,
         "White": 1767
       },
-      "gr_race": {}
+      "gr_race": {},
+      "o_ug_exc": 4125,
+      "o_ug_som": 7363,
+      "o_ug_non": 5956,
+      "o_gr_exc": 0,
+      "o_gr_som": 0,
+      "o_gr_non": 0
     },
     {
       "unitid": 190664,
@@ -313,7 +349,13 @@
         "Native Hawaiian / Pacific Islander": 7,
         "U.S. Nonresident (international)": 131,
         "White": 1089
-      }
+      },
+      "o_ug_exc": 729,
+      "o_ug_som": 5719,
+      "o_ug_non": 7958,
+      "o_gr_exc": 790,
+      "o_gr_som": 706,
+      "o_gr_non": 1099
     },
     {
       "unitid": 191241,
@@ -360,7 +402,13 @@
         "U.S. Nonresident (international)": 1085,
         "Race/ethnicity unknown": 178,
         "White": 2903
-      }
+      },
+      "o_ug_exc": 60,
+      "o_ug_som": 388,
+      "o_ug_non": 9650,
+      "o_gr_exc": 1754,
+      "o_gr_som": 925,
+      "o_gr_non": 3779
     },
     {
       "unitid": 190619,
@@ -396,7 +444,13 @@
         "U.S. Nonresident (international)": 298,
         "White": 4602
       },
-      "gr_race": {}
+      "gr_race": {},
+      "o_ug_exc": 9030,
+      "o_ug_som": 4224,
+      "o_ug_non": 1788,
+      "o_gr_exc": 0,
+      "o_gr_som": 0,
+      "o_gr_non": 0
     },
     {
       "unitid": 190567,
@@ -441,7 +495,13 @@
         "Native Hawaiian / Pacific Islander": 3,
         "U.S. Nonresident (international)": 241,
         "White": 722
-      }
+      },
+      "o_ug_exc": 679,
+      "o_ug_som": 4564,
+      "o_ug_non": 6686,
+      "o_gr_exc": 582,
+      "o_gr_som": 705,
+      "o_gr_non": 1273
     },
     {
       "unitid": 190549,
@@ -486,7 +546,13 @@
         "Native Hawaiian / Pacific Islander": 2,
         "U.S. Nonresident (international)": 138,
         "White": 941
-      }
+      },
+      "o_ug_exc": 1036,
+      "o_ug_som": 4716,
+      "o_ug_non": 5909,
+      "o_gr_exc": 689,
+      "o_gr_som": 868,
+      "o_gr_non": 977
     },
     {
       "unitid": 190600,
@@ -531,7 +597,13 @@
         "Native Hawaiian / Pacific Islander": 4,
         "U.S. Nonresident (international)": 81,
         "White": 642
-      }
+      },
+      "o_ug_exc": 2585,
+      "o_ug_som": 5755,
+      "o_ug_non": 3721,
+      "o_gr_exc": 936,
+      "o_gr_som": 540,
+      "o_gr_non": 384
     },
     {
       "unitid": 194310,
@@ -578,7 +650,13 @@
         "U.S. Nonresident (international)": 1555,
         "Race/ethnicity unknown": 220,
         "White": 1899
-      }
+      },
+      "o_ug_exc": 343,
+      "o_ug_som": 4724,
+      "o_ug_non": 3156,
+      "o_gr_exc": 849,
+      "o_gr_som": 1840,
+      "o_gr_non": 2697
     },
     {
       "unitid": 190655,
@@ -614,7 +692,13 @@
         "U.S. Nonresident (international)": 514,
         "White": 1464
       },
-      "gr_race": {}
+      "gr_race": {},
+      "o_ug_exc": 1440,
+      "o_ug_som": 5969,
+      "o_ug_non": 5678,
+      "o_gr_exc": 0,
+      "o_gr_som": 0,
+      "o_gr_non": 0
     },
     {
       "unitid": 190628,
@@ -650,7 +734,13 @@
         "U.S. Nonresident (international)": 871,
         "White": 1340
       },
-      "gr_race": {}
+      "gr_race": {},
+      "o_ug_exc": 3520,
+      "o_ug_som": 4795,
+      "o_ug_non": 4749,
+      "o_gr_exc": 0,
+      "o_gr_som": 0,
+      "o_gr_non": 0
     },
     {
       "unitid": 190637,
@@ -695,7 +785,13 @@
         "Native Hawaiian / Pacific Islander": 5,
         "U.S. Nonresident (international)": 45,
         "White": 317
-      }
+      },
+      "o_ug_exc": 2579,
+      "o_ug_som": 5955,
+      "o_ug_non": 2677,
+      "o_gr_exc": 612,
+      "o_gr_som": 316,
+      "o_gr_non": 876
     },
     {
       "unitid": 196592,
@@ -742,7 +838,13 @@
         "U.S. Nonresident (international)": 183,
         "Race/ethnicity unknown": 304,
         "White": 3057
-      }
+      },
+      "o_ug_exc": 1676,
+      "o_ug_som": 1530,
+      "o_ug_non": 1654,
+      "o_gr_exc": 1757,
+      "o_gr_som": 1489,
+      "o_gr_non": 3005
     },
     {
       "unitid": 190558,
@@ -787,7 +889,13 @@
         "Native Hawaiian / Pacific Islander": 1,
         "U.S. Nonresident (international)": 15,
         "White": 594
-      }
+      },
+      "o_ug_exc": 1287,
+      "o_ug_som": 4300,
+      "o_ug_non": 3712,
+      "o_gr_exc": 201,
+      "o_gr_som": 270,
+      "o_gr_non": 478
     },
     {
       "unitid": 193654,
@@ -834,7 +942,13 @@
         "U.S. Nonresident (international)": 1408,
         "Race/ethnicity unknown": 44,
         "White": 884
-      }
+      },
+      "o_ug_exc": 188,
+      "o_ug_som": 2842,
+      "o_ug_non": 4141,
+      "o_gr_exc": 116,
+      "o_gr_som": 946,
+      "o_gr_non": 1875
     },
     {
       "unitid": 190673,
@@ -870,7 +984,13 @@
         "U.S. Nonresident (international)": 504,
         "White": 1195
       },
-      "gr_race": {}
+      "gr_race": {},
+      "o_ug_exc": 1652,
+      "o_ug_som": 3762,
+      "o_ug_non": 4159,
+      "o_gr_exc": 0,
+      "o_gr_som": 0,
+      "o_gr_non": 0
     },
     {
       "unitid": 190576,
@@ -915,7 +1035,13 @@
         "Native Hawaiian / Pacific Islander": 8,
         "U.S. Nonresident (international)": 930,
         "White": 2409
-      }
+      },
+      "o_ug_exc": 2654,
+      "o_ug_som": 15,
+      "o_ug_non": 124,
+      "o_gr_exc": 3609,
+      "o_gr_som": 865,
+      "o_gr_non": 1466
     },
     {
       "unitid": 191126,
@@ -961,7 +1087,13 @@
         "U.S. Nonresident (international)": 76,
         "Race/ethnicity unknown": 1,
         "White": 101
-      }
+      },
+      "o_ug_exc": 326,
+      "o_ug_som": 3101,
+      "o_ug_non": 4444,
+      "o_gr_exc": 0,
+      "o_gr_som": 1,
+      "o_gr_non": 253
     },
     {
       "unitid": 193308,
@@ -1004,7 +1136,13 @@
         "Hispanic": 145,
         "U.S. Nonresident (international)": 705,
         "White": 16
-      }
+      },
+      "o_ug_exc": 2681,
+      "o_ug_som": 2436,
+      "o_ug_non": 799,
+      "o_gr_exc": 201,
+      "o_gr_som": 483,
+      "o_gr_non": 411
     },
     {
       "unitid": 190530,
@@ -1040,7 +1178,13 @@
         "U.S. Nonresident (international)": 196,
         "White": 191
       },
-      "gr_race": {}
+      "gr_race": {},
+      "o_ug_exc": 1548,
+      "o_ug_som": 2844,
+      "o_ug_non": 2323,
+      "o_gr_exc": 0,
+      "o_gr_som": 0,
+      "o_gr_non": 0
     },
     {
       "unitid": 190691,
@@ -1083,7 +1227,13 @@
         "Hispanic": 50,
         "U.S. Nonresident (international)": 10,
         "White": 53
-      }
+      },
+      "o_ug_exc": 1582,
+      "o_ug_som": 2409,
+      "o_ug_non": 2208,
+      "o_gr_exc": 33,
+      "o_gr_som": 64,
+      "o_gr_non": 150
     },
     {
       "unitid": 197708,
@@ -1129,7 +1279,13 @@
         "U.S. Nonresident (international)": 340,
         "Race/ethnicity unknown": 759,
         "White": 1536
-      }
+      },
+      "o_ug_exc": 3,
+      "o_ug_som": 367,
+      "o_ug_non": 2496,
+      "o_gr_exc": 884,
+      "o_gr_som": 719,
+      "o_gr_non": 1587
     },
     {
       "unitid": 194578,
@@ -1174,7 +1330,13 @@
         "U.S. Nonresident (international)": 760,
         "Race/ethnicity unknown": 12,
         "White": 468
-      }
+      },
+      "o_ug_exc": 0,
+      "o_ug_som": 0,
+      "o_ug_non": 3934,
+      "o_gr_exc": 0,
+      "o_gr_som": 0,
+      "o_gr_non": 1560
     },
     {
       "unitid": 190585,
@@ -1210,7 +1372,13 @@
         "U.S. Nonresident (international)": 194,
         "White": 219
       },
-      "gr_race": {}
+      "gr_race": {},
+      "o_ug_exc": 930,
+      "o_ug_som": 2629,
+      "o_ug_non": 1345,
+      "o_gr_exc": 0,
+      "o_gr_som": 0,
+      "o_gr_non": 0
     },
     {
       "unitid": 196468,
@@ -1247,7 +1415,13 @@
         "U.S. Nonresident (international)": 1368,
         "Race/ethnicity unknown": 90,
         "White": 1491
-      }
+      },
+      "o_ug_exc": 0,
+      "o_ug_som": 0,
+      "o_ug_non": 0,
+      "o_gr_exc": 294,
+      "o_gr_som": 1323,
+      "o_gr_non": 2897
     },
     {
       "unitid": 195544,
@@ -1292,7 +1466,13 @@
         "U.S. Nonresident (international)": 4,
         "Race/ethnicity unknown": 104,
         "White": 427
-      }
+      },
+      "o_ug_exc": 270,
+      "o_ug_som": 1636,
+      "o_ug_non": 1650,
+      "o_gr_exc": 343,
+      "o_gr_som": 105,
+      "o_gr_non": 344
     },
     {
       "unitid": 197151,
@@ -1337,7 +1517,13 @@
         "U.S. Nonresident (international)": 371,
         "Race/ethnicity unknown": 18,
         "White": 98
-      }
+      },
+      "o_ug_exc": 0,
+      "o_ug_som": 0,
+      "o_ug_non": 3533,
+      "o_gr_exc": 0,
+      "o_gr_som": 0,
+      "o_gr_non": 594
     },
     {
       "unitid": 190646,
@@ -1373,7 +1559,13 @@
         "U.S. Nonresident (international)": 85,
         "White": 70
       },
-      "gr_race": {}
+      "gr_race": {},
+      "o_ug_exc": 951,
+      "o_ug_som": 1859,
+      "o_ug_non": 830,
+      "o_gr_exc": 0,
+      "o_gr_som": 0,
+      "o_gr_non": 0
     },
     {
       "unitid": 192703,
@@ -1419,7 +1611,13 @@
         "U.S. Nonresident (international)": 36,
         "Race/ethnicity unknown": 24,
         "White": 213
-      }
+      },
+      "o_ug_exc": 11,
+      "o_ug_som": 139,
+      "o_ug_non": 2916,
+      "o_gr_exc": 31,
+      "o_gr_som": 233,
+      "o_gr_non": 245
     },
     {
       "unitid": 189097,
@@ -1455,7 +1653,13 @@
         "Race/ethnicity unknown": 373,
         "White": 1152
       },
-      "gr_race": {}
+      "gr_race": {},
+      "o_ug_exc": 309,
+      "o_ug_som": 0,
+      "o_ug_non": 3133,
+      "o_gr_exc": 0,
+      "o_gr_som": 0,
+      "o_gr_non": 0
     },
     {
       "unitid": 193399,
@@ -1501,7 +1705,13 @@
         "U.S. Nonresident (international)": 3,
         "Race/ethnicity unknown": 16,
         "White": 336
-      }
+      },
+      "o_ug_exc": 123,
+      "o_ug_som": 811,
+      "o_ug_non": 1325,
+      "o_gr_exc": 79,
+      "o_gr_som": 178,
+      "o_gr_non": 361
     },
     {
       "unitid": 195173,
@@ -1546,7 +1756,13 @@
         "U.S. Nonresident (international)": 309,
         "Race/ethnicity unknown": 5,
         "White": 25
-      }
+      },
+      "o_ug_exc": 41,
+      "o_ug_som": 2235,
+      "o_ug_non": 0,
+      "o_gr_exc": 18,
+      "o_gr_som": 367,
+      "o_gr_non": 0
     },
     {
       "unitid": 475033,
@@ -1591,7 +1807,13 @@
         "U.S. Nonresident (international)": 87,
         "Race/ethnicity unknown": 23,
         "White": 698
-      }
+      },
+      "o_ug_exc": 153,
+      "o_ug_som": 0,
+      "o_ug_non": 0,
+      "o_gr_exc": 2484,
+      "o_gr_som": 0,
+      "o_gr_non": 0
     },
     {
       "unitid": 196255,
@@ -1635,7 +1857,13 @@
         "U.S. Nonresident (international)": 31,
         "Race/ethnicity unknown": 113,
         "White": 534
-      }
+      },
+      "o_ug_exc": 0,
+      "o_ug_som": 254,
+      "o_ug_non": 28,
+      "o_gr_exc": 199,
+      "o_gr_som": 398,
+      "o_gr_non": 1306
     },
     {
       "unitid": 197018,
@@ -1666,7 +1894,13 @@
         "U.S. Nonresident (international)": 95,
         "White": 2007
       },
-      "gr_race": {}
+      "gr_race": {},
+      "o_ug_exc": 0,
+      "o_ug_som": 0,
+      "o_ug_non": 2104,
+      "o_gr_exc": 0,
+      "o_gr_som": 0,
+      "o_gr_non": 0
     },
     {
       "unitid": 197197,
@@ -1713,7 +1947,13 @@
         "U.S. Nonresident (international)": 12,
         "Race/ethnicity unknown": 11,
         "White": 198
-      }
+      },
+      "o_ug_exc": 0,
+      "o_ug_som": 0,
+      "o_ug_non": 1590,
+      "o_gr_exc": 0,
+      "o_gr_som": 0,
+      "o_gr_non": 356
     },
     {
       "unitid": 189228,
@@ -1757,7 +1997,13 @@
         "Hispanic": 7,
         "Race/ethnicity unknown": 48,
         "White": 2
-      }
+      },
+      "o_ug_exc": 1162,
+      "o_ug_som": 323,
+      "o_ug_non": 333,
+      "o_gr_exc": 55,
+      "o_gr_som": 2,
+      "o_gr_non": 7
     },
     {
       "unitid": 192864,
@@ -1794,7 +2040,13 @@
         "Race/ethnicity unknown": 71,
         "White": 822
       },
-      "gr_race": {}
+      "gr_race": {},
+      "o_ug_exc": 4,
+      "o_ug_som": 959,
+      "o_ug_non": 645,
+      "o_gr_exc": 0,
+      "o_gr_som": 0,
+      "o_gr_non": 0
     },
     {
       "unitid": 194161,
@@ -1840,7 +2092,13 @@
         "U.S. Nonresident (international)": 53,
         "Race/ethnicity unknown": 8,
         "White": 119
-      }
+      },
+      "o_ug_exc": 166,
+      "o_ug_som": 481,
+      "o_ug_non": 121,
+      "o_gr_exc": 383,
+      "o_gr_som": 204,
+      "o_gr_non": 240
     },
     {
       "unitid": 188854,
@@ -1881,7 +2139,13 @@
         "Two or more races": 6,
         "Black": 1,
         "Hispanic": 2
-      }
+      },
+      "o_ug_exc": 0,
+      "o_ug_som": 0,
+      "o_ug_non": 1471,
+      "o_gr_exc": 0,
+      "o_gr_som": 0,
+      "o_gr_non": 9
     },
     {
       "unitid": 196291,
@@ -1924,7 +2188,13 @@
         "U.S. Nonresident (international)": 5,
         "Race/ethnicity unknown": 11,
         "White": 77
-      }
+      },
+      "o_ug_exc": 10,
+      "o_ug_som": 456,
+      "o_ug_non": 829,
+      "o_gr_exc": 86,
+      "o_gr_som": 33,
+      "o_gr_non": 13
     },
     {
       "unitid": 190424,
@@ -1961,7 +2231,13 @@
         "U.S. Nonresident (international)": 264,
         "Race/ethnicity unknown": 60,
         "White": 450
-      }
+      },
+      "o_ug_exc": 0,
+      "o_ug_som": 0,
+      "o_ug_non": 0,
+      "o_gr_exc": 6,
+      "o_gr_som": 70,
+      "o_gr_non": 1251
     },
     {
       "unitid": 192271,
@@ -2006,7 +2282,13 @@
         "U.S. Nonresident (international)": 78,
         "Race/ethnicity unknown": 4,
         "White": 54
-      }
+      },
+      "o_ug_exc": 419,
+      "o_ug_som": 641,
+      "o_ug_non": 20,
+      "o_gr_exc": 119,
+      "o_gr_som": 106,
+      "o_gr_non": 5
     },
     {
       "unitid": 385415,
@@ -2042,7 +2324,13 @@
         "U.S. Nonresident (international)": 34,
         "Race/ethnicity unknown": 100,
         "White": 588
-      }
+      },
+      "o_ug_exc": 0,
+      "o_ug_som": 0,
+      "o_ug_non": 0,
+      "o_gr_exc": 0,
+      "o_gr_som": 28,
+      "o_gr_non": 1275
     },
     {
       "unitid": 193405,
@@ -2079,7 +2367,13 @@
         "U.S. Nonresident (international)": 181,
         "Race/ethnicity unknown": 68,
         "White": 426
-      }
+      },
+      "o_ug_exc": 0,
+      "o_ug_som": 0,
+      "o_ug_non": 0,
+      "o_gr_exc": 0,
+      "o_gr_som": 5,
+      "o_gr_non": 1248
     },
     {
       "unitid": 189501,
@@ -2115,7 +2409,13 @@
         "U.S. Nonresident (international)": 50,
         "Race/ethnicity unknown": 37,
         "White": 755
-      }
+      },
+      "o_ug_exc": 0,
+      "o_ug_som": 0,
+      "o_ug_non": 0,
+      "o_gr_exc": 0,
+      "o_gr_som": 305,
+      "o_gr_non": 905
     },
     {
       "unitid": 188340,
@@ -2159,7 +2459,13 @@
         "U.S. Nonresident (international)": 4,
         "Race/ethnicity unknown": 1,
         "White": 4
-      }
+      },
+      "o_ug_exc": 61,
+      "o_ug_som": 373,
+      "o_ug_non": 759,
+      "o_gr_exc": 5,
+      "o_gr_som": 7,
+      "o_gr_non": 0
     },
     {
       "unitid": 192712,
@@ -2204,7 +2510,13 @@
         "U.S. Nonresident (international)": 378,
         "Race/ethnicity unknown": 16,
         "White": 116
-      }
+      },
+      "o_ug_exc": 0,
+      "o_ug_som": 203,
+      "o_ug_non": 305,
+      "o_gr_exc": 13,
+      "o_gr_som": 39,
+      "o_gr_non": 555
     },
     {
       "unitid": 188890,
@@ -2238,7 +2550,13 @@
         "Race/ethnicity unknown": 156,
         "White": 100
       },
-      "gr_race": {}
+      "gr_race": {},
+      "o_ug_exc": 0,
+      "o_ug_som": 0,
+      "o_ug_non": 1072,
+      "o_gr_exc": 0,
+      "o_gr_som": 0,
+      "o_gr_non": 0
     },
     {
       "unitid": 196389,
@@ -2272,7 +2590,13 @@
         "Race/ethnicity unknown": 218,
         "White": 51
       },
-      "gr_race": {}
+      "gr_race": {},
+      "o_ug_exc": 0,
+      "o_ug_som": 0,
+      "o_ug_non": 1053,
+      "o_gr_exc": 0,
+      "o_gr_som": 0,
+      "o_gr_non": 0
     },
     {
       "unitid": 193821,
@@ -2308,7 +2632,13 @@
         "U.S. Nonresident (international)": 35,
         "Race/ethnicity unknown": 71,
         "White": 688
-      }
+      },
+      "o_ug_exc": 0,
+      "o_ug_som": 0,
+      "o_ug_non": 0,
+      "o_gr_exc": 10,
+      "o_gr_som": 331,
+      "o_gr_non": 709
     },
     {
       "unitid": 192110,
@@ -2352,7 +2682,13 @@
         "U.S. Nonresident (international)": 146,
         "Race/ethnicity unknown": 2,
         "White": 120
-      }
+      },
+      "o_ug_exc": 74,
+      "o_ug_som": 11,
+      "o_ug_non": 501,
+      "o_gr_exc": 0,
+      "o_gr_som": 0,
+      "o_gr_non": 400
     },
     {
       "unitid": 190372,
@@ -2395,7 +2731,13 @@
         "U.S. Nonresident (international)": 13,
         "Race/ethnicity unknown": 6,
         "White": 18
-      }
+      },
+      "o_ug_exc": 0,
+      "o_ug_som": 0,
+      "o_ug_non": 899,
+      "o_gr_exc": 0,
+      "o_gr_som": 0,
+      "o_gr_non": 59
     },
     {
       "unitid": 461014,
@@ -2429,7 +2771,13 @@
         "Race/ethnicity unknown": 195,
         "White": 19
       },
-      "gr_race": {}
+      "gr_race": {},
+      "o_ug_exc": 0,
+      "o_ug_som": 867,
+      "o_ug_non": 0,
+      "o_gr_exc": 0,
+      "o_gr_som": 0,
+      "o_gr_non": 0
     },
     {
       "unitid": 475565,
@@ -2464,7 +2812,13 @@
         "U.S. Nonresident (international)": 23,
         "White": 39
       },
-      "gr_race": {}
+      "gr_race": {},
+      "o_ug_exc": 45,
+      "o_ug_som": 513,
+      "o_ug_non": 284,
+      "o_gr_exc": 0,
+      "o_gr_som": 0,
+      "o_gr_non": 0
     },
     {
       "unitid": 189811,
@@ -2500,7 +2854,13 @@
         "Race/ethnicity unknown": 69,
         "White": 74
       },
-      "gr_race": {}
+      "gr_race": {},
+      "o_ug_exc": 0,
+      "o_ug_som": 0,
+      "o_ug_non": 827,
+      "o_gr_exc": 0,
+      "o_gr_som": 0,
+      "o_gr_non": 0
     },
     {
       "unitid": 194499,
@@ -2533,7 +2893,13 @@
         "Hispanic": 258,
         "White": 80
       },
-      "gr_race": {}
+      "gr_race": {},
+      "o_ug_exc": 605,
+      "o_ug_som": 202,
+      "o_ug_non": 0,
+      "o_gr_exc": 0,
+      "o_gr_som": 0,
+      "o_gr_non": 0
     },
     {
       "unitid": 189857,
@@ -2566,7 +2932,13 @@
       "gr_race": {
         "U.S. Nonresident (international)": 19,
         "White": 70
-      }
+      },
+      "o_ug_exc": 0,
+      "o_ug_som": 0,
+      "o_ug_non": 679,
+      "o_gr_exc": 0,
+      "o_gr_som": 0,
+      "o_gr_non": 89
     },
     {
       "unitid": 189990,
@@ -2603,7 +2975,13 @@
         "Race/ethnicity unknown": 3,
         "White": 116
       },
-      "gr_race": {}
+      "gr_race": {},
+      "o_ug_exc": 0,
+      "o_ug_som": 1,
+      "o_ug_non": 744,
+      "o_gr_exc": 0,
+      "o_gr_som": 0,
+      "o_gr_non": 0
     },
     {
       "unitid": 192509,
@@ -2638,7 +3016,13 @@
         "Race/ethnicity unknown": 2,
         "White": 51
       },
-      "gr_race": {}
+      "gr_race": {},
+      "o_ug_exc": 0,
+      "o_ug_som": 0,
+      "o_ug_non": 744,
+      "o_gr_exc": 0,
+      "o_gr_som": 0,
+      "o_gr_non": 0
     },
     {
       "unitid": 190682,
@@ -2672,7 +3056,13 @@
         "Hispanic": 176,
         "U.S. Nonresident (international)": 23,
         "White": 306
-      }
+      },
+      "o_ug_exc": 0,
+      "o_ug_som": 0,
+      "o_ug_non": 0,
+      "o_gr_exc": 8,
+      "o_gr_som": 60,
+      "o_gr_non": 631
     },
     {
       "unitid": 449320,
@@ -2708,7 +3098,13 @@
         "Race/ethnicity unknown": 51,
         "White": 58
       },
-      "gr_race": {}
+      "gr_race": {},
+      "o_ug_exc": 0,
+      "o_ug_som": 0,
+      "o_ug_non": 697,
+      "o_gr_exc": 0,
+      "o_gr_som": 0,
+      "o_gr_non": 0
     },
     {
       "unitid": 189015,
@@ -2743,7 +3139,13 @@
         "Native Hawaiian / Pacific Islander": 1,
         "Race/ethnicity unknown": 47,
         "White": 345
-      }
+      },
+      "o_ug_exc": 0,
+      "o_ug_som": 0,
+      "o_ug_non": 0,
+      "o_gr_exc": 174,
+      "o_gr_som": 6,
+      "o_gr_non": 503
     },
     {
       "unitid": 457819,
@@ -2780,7 +3182,13 @@
         "Race/ethnicity unknown": 19,
         "White": 243
       },
-      "gr_race": {}
+      "gr_race": {},
+      "o_ug_exc": 5,
+      "o_ug_som": 2,
+      "o_ug_non": 669,
+      "o_gr_exc": 0,
+      "o_gr_som": 0,
+      "o_gr_non": 0
     },
     {
       "unitid": 195784,
@@ -2817,7 +3225,13 @@
         "Race/ethnicity unknown": 39,
         "White": 200
       },
-      "gr_race": {}
+      "gr_race": {},
+      "o_ug_exc": 0,
+      "o_ug_som": 0,
+      "o_ug_non": 658,
+      "o_gr_exc": 0,
+      "o_gr_som": 0,
+      "o_gr_non": 0
     },
     {
       "unitid": 194116,
@@ -2861,7 +3275,13 @@
         "U.S. Nonresident (international)": 52,
         "Race/ethnicity unknown": 2,
         "White": 67
-      }
+      },
+      "o_ug_exc": 297,
+      "o_ug_som": 143,
+      "o_ug_non": 40,
+      "o_gr_exc": 2,
+      "o_gr_som": 127,
+      "o_gr_non": 24
     },
     {
       "unitid": 190114,
@@ -2906,7 +3326,13 @@
         "U.S. Nonresident (international)": 21,
         "Race/ethnicity unknown": 1,
         "White": 6
-      }
+      },
+      "o_ug_exc": 275,
+      "o_ug_som": 107,
+      "o_ug_non": 44,
+      "o_gr_exc": 65,
+      "o_gr_som": 132,
+      "o_gr_non": 9
     },
     {
       "unitid": 414595,
@@ -2948,7 +3374,13 @@
         "Hispanic": 33,
         "Race/ethnicity unknown": 103,
         "White": 107
-      }
+      },
+      "o_ug_exc": 119,
+      "o_ug_som": 117,
+      "o_ug_non": 13,
+      "o_gr_exc": 38,
+      "o_gr_som": 280,
+      "o_gr_non": 53
     },
     {
       "unitid": 194763,
@@ -2979,7 +3411,13 @@
       },
       "gr_race": {
         "White": 244
-      }
+      },
+      "o_ug_exc": 0,
+      "o_ug_som": 0,
+      "o_ug_non": 346,
+      "o_gr_exc": 0,
+      "o_gr_som": 0,
+      "o_gr_non": 244
     },
     {
       "unitid": 482413,
@@ -3024,7 +3462,13 @@
         "U.S. Nonresident (international)": 38,
         "Race/ethnicity unknown": 14,
         "White": 23
-      }
+      },
+      "o_ug_exc": 291,
+      "o_ug_som": 131,
+      "o_ug_non": 1,
+      "o_gr_exc": 73,
+      "o_gr_som": 19,
+      "o_gr_non": 53
     },
     {
       "unitid": 193052,
@@ -3055,7 +3499,13 @@
       },
       "gr_race": {
         "White": 205
-      }
+      },
+      "o_ug_exc": 0,
+      "o_ug_som": 0,
+      "o_ug_non": 344,
+      "o_gr_exc": 0,
+      "o_gr_som": 0,
+      "o_gr_non": 205
     },
     {
       "unitid": 191597,
@@ -3091,7 +3541,13 @@
         "Race/ethnicity unknown": 4,
         "White": 60
       },
-      "gr_race": {}
+      "gr_race": {},
+      "o_ug_exc": 0,
+      "o_ug_som": 0,
+      "o_ug_non": 544,
+      "o_gr_exc": 0,
+      "o_gr_som": 0,
+      "o_gr_non": 0
     },
     {
       "unitid": 194666,
@@ -3122,7 +3578,13 @@
       },
       "gr_race": {
         "White": 71
-      }
+      },
+      "o_ug_exc": 0,
+      "o_ug_som": 0,
+      "o_ug_non": 431,
+      "o_gr_exc": 0,
+      "o_gr_som": 0,
+      "o_gr_non": 71
     },
     {
       "unitid": 486415,
@@ -3155,7 +3617,13 @@
         "Native Hawaiian / Pacific Islander": 7,
         "White": 11
       },
-      "gr_race": {}
+      "gr_race": {},
+      "o_ug_exc": 0,
+      "o_ug_som": 0,
+      "o_ug_non": 479,
+      "o_gr_exc": 0,
+      "o_gr_som": 0,
+      "o_gr_non": 0
     },
     {
       "unitid": 189413,
@@ -3194,7 +3662,13 @@
         "Hispanic": 40,
         "Race/ethnicity unknown": 1,
         "White": 3
-      }
+      },
+      "o_ug_exc": 0,
+      "o_ug_som": 0,
+      "o_ug_non": 391,
+      "o_gr_exc": 0,
+      "o_gr_som": 0,
+      "o_gr_non": 70
     },
     {
       "unitid": 451404,
@@ -3223,7 +3697,13 @@
       "ug_race": {
         "White": 459
       },
-      "gr_race": {}
+      "gr_race": {},
+      "o_ug_exc": 0,
+      "o_ug_som": 0,
+      "o_ug_non": 459,
+      "o_gr_exc": 0,
+      "o_gr_som": 0,
+      "o_gr_non": 0
     },
     {
       "unitid": 192688,
@@ -3257,7 +3737,13 @@
         "Race/ethnicity unknown": 14,
         "White": 21
       },
-      "gr_race": {}
+      "gr_race": {},
+      "o_ug_exc": 0,
+      "o_ug_som": 0,
+      "o_ug_non": 437,
+      "o_gr_exc": 0,
+      "o_gr_som": 0,
+      "o_gr_non": 0
     },
     {
       "unitid": 455257,
@@ -3287,7 +3773,13 @@
         "U.S. Nonresident (international)": 11,
         "White": 420
       },
-      "gr_race": {}
+      "gr_race": {},
+      "o_ug_exc": 0,
+      "o_ug_som": 0,
+      "o_ug_non": 431,
+      "o_gr_exc": 0,
+      "o_gr_som": 0,
+      "o_gr_non": 0
     },
     {
       "unitid": 386153,
@@ -3316,7 +3808,13 @@
       "ug_race": {
         "White": 426
       },
-      "gr_race": {}
+      "gr_race": {},
+      "o_ug_exc": 0,
+      "o_ug_som": 0,
+      "o_ug_non": 425,
+      "o_gr_exc": 0,
+      "o_gr_som": 0,
+      "o_gr_non": 0
     },
     {
       "unitid": 196228,
@@ -3351,7 +3849,13 @@
         "Native Hawaiian / Pacific Islander": 2,
         "U.S. Nonresident (international)": 35,
         "White": 146
-      }
+      },
+      "o_ug_exc": 0,
+      "o_ug_som": 0,
+      "o_ug_non": 0,
+      "o_gr_exc": 0,
+      "o_gr_som": 0,
+      "o_gr_non": 409
     },
     {
       "unitid": 440262,
@@ -3388,7 +3892,13 @@
         "Race/ethnicity unknown": 37,
         "White": 22
       },
-      "gr_race": {}
+      "gr_race": {},
+      "o_ug_exc": 0,
+      "o_ug_som": 0,
+      "o_ug_non": 408,
+      "o_gr_exc": 0,
+      "o_gr_som": 0,
+      "o_gr_non": 0
     },
     {
       "unitid": 451413,
@@ -3423,7 +3933,13 @@
         "Native Hawaiian / Pacific Islander": 3,
         "White": 195
       },
-      "gr_race": {}
+      "gr_race": {},
+      "o_ug_exc": 0,
+      "o_ug_som": 393,
+      "o_ug_non": 0,
+      "o_gr_exc": 0,
+      "o_gr_som": 0,
+      "o_gr_non": 0
     },
     {
       "unitid": 188687,
@@ -3458,7 +3974,13 @@
         "Race/ethnicity unknown": 29,
         "White": 189
       },
-      "gr_race": {}
+      "gr_race": {},
+      "o_ug_exc": 309,
+      "o_ug_som": 23,
+      "o_ug_non": 50,
+      "o_gr_exc": 0,
+      "o_gr_som": 0,
+      "o_gr_non": 0
     },
     {
       "unitid": 421841,
@@ -3493,7 +4015,13 @@
         "Race/ethnicity unknown": 9,
         "White": 115
       },
-      "gr_race": {}
+      "gr_race": {},
+      "o_ug_exc": 0,
+      "o_ug_som": 0,
+      "o_ug_non": 376,
+      "o_gr_exc": 0,
+      "o_gr_som": 0,
+      "o_gr_non": 0
     },
     {
       "unitid": 196431,
@@ -3523,7 +4051,13 @@
         "U.S. Nonresident (international)": 31,
         "White": 317
       },
-      "gr_race": {}
+      "gr_race": {},
+      "o_ug_exc": 0,
+      "o_ug_som": 0,
+      "o_ug_non": 348,
+      "o_gr_exc": 0,
+      "o_gr_som": 0,
+      "o_gr_non": 0
     },
     {
       "unitid": 420981,
@@ -3556,7 +4090,13 @@
         "Race/ethnicity unknown": 44,
         "White": 90
       },
-      "gr_race": {}
+      "gr_race": {},
+      "o_ug_exc": 0,
+      "o_ug_som": 99,
+      "o_ug_non": 240,
+      "o_gr_exc": 0,
+      "o_gr_som": 0,
+      "o_gr_non": 0
     },
     {
       "unitid": 194073,
@@ -3592,7 +4132,13 @@
         "U.S. Nonresident (international)": 13,
         "Race/ethnicity unknown": 8,
         "White": 107
-      }
+      },
+      "o_ug_exc": 0,
+      "o_ug_som": 0,
+      "o_ug_non": 0,
+      "o_gr_exc": 0,
+      "o_gr_som": 0,
+      "o_gr_non": 334
     },
     {
       "unitid": 449676,
@@ -3628,7 +4174,13 @@
         "Race/ethnicity unknown": 1,
         "White": 27
       },
-      "gr_race": {}
+      "gr_race": {},
+      "o_ug_exc": 0,
+      "o_ug_som": 0,
+      "o_ug_non": 330,
+      "o_gr_exc": 0,
+      "o_gr_som": 0,
+      "o_gr_non": 0
     },
     {
       "unitid": 189282,
@@ -3662,7 +4214,13 @@
         "Native Hawaiian / Pacific Islander": 6,
         "White": 139
       },
-      "gr_race": {}
+      "gr_race": {},
+      "o_ug_exc": 0,
+      "o_ug_som": 0,
+      "o_ug_non": 329,
+      "o_gr_exc": 0,
+      "o_gr_som": 0,
+      "o_gr_non": 0
     },
     {
       "unitid": 454184,
@@ -3699,7 +4257,13 @@
         "Race/ethnicity unknown": 33,
         "White": 197
       },
-      "gr_race": {}
+      "gr_race": {},
+      "o_ug_exc": 55,
+      "o_ug_som": 44,
+      "o_ug_non": 227,
+      "o_gr_exc": 0,
+      "o_gr_som": 0,
+      "o_gr_non": 0
     },
     {
       "unitid": 192040,
@@ -3738,7 +4302,13 @@
         "U.S. Nonresident (international)": 8,
         "Race/ethnicity unknown": 26,
         "White": 129
-      }
+      },
+      "o_ug_exc": 0,
+      "o_ug_som": 0,
+      "o_ug_non": 149,
+      "o_gr_exc": 18,
+      "o_gr_som": 15,
+      "o_gr_non": 136
     },
     {
       "unitid": 203067,
@@ -3773,7 +4343,13 @@
         "U.S. Nonresident (international)": 4,
         "Race/ethnicity unknown": 4,
         "White": 286
-      }
+      },
+      "o_ug_exc": 0,
+      "o_ug_som": 0,
+      "o_ug_non": 0,
+      "o_gr_exc": 30,
+      "o_gr_som": 288,
+      "o_gr_non": 0
     },
     {
       "unitid": 195067,
@@ -3808,7 +4384,13 @@
         "Race/ethnicity unknown": 52,
         "White": 8
       },
-      "gr_race": {}
+      "gr_race": {},
+      "o_ug_exc": 0,
+      "o_ug_som": 0,
+      "o_ug_non": 317,
+      "o_gr_exc": 0,
+      "o_gr_som": 0,
+      "o_gr_non": 0
     },
     {
       "unitid": 188942,
@@ -3838,7 +4420,13 @@
         "U.S. Nonresident (international)": 37,
         "White": 271
       },
-      "gr_race": {}
+      "gr_race": {},
+      "o_ug_exc": 0,
+      "o_ug_som": 0,
+      "o_ug_non": 308,
+      "o_gr_exc": 0,
+      "o_gr_som": 0,
+      "o_gr_non": 0
     },
     {
       "unitid": 441575,
@@ -3870,7 +4458,13 @@
         "Hispanic": 60,
         "White": 1
       },
-      "gr_race": {}
+      "gr_race": {},
+      "o_ug_exc": 265,
+      "o_ug_som": 29,
+      "o_ug_non": 0,
+      "o_gr_exc": 0,
+      "o_gr_som": 0,
+      "o_gr_non": 0
     },
     {
       "unitid": 491057,
@@ -3899,7 +4493,13 @@
       "ug_race": {
         "White": 292
       },
-      "gr_race": {}
+      "gr_race": {},
+      "o_ug_exc": 0,
+      "o_ug_som": 0,
+      "o_ug_non": 292,
+      "o_gr_exc": 0,
+      "o_gr_som": 0,
+      "o_gr_non": 0
     },
     {
       "unitid": 195049,
@@ -3935,7 +4535,13 @@
         "U.S. Nonresident (international)": 98,
         "Race/ethnicity unknown": 1,
         "White": 100
-      }
+      },
+      "o_ug_exc": 0,
+      "o_ug_som": 0,
+      "o_ug_non": 0,
+      "o_gr_exc": 0,
+      "o_gr_som": 0,
+      "o_gr_non": 273
     },
     {
       "unitid": 193858,
@@ -3968,7 +4574,13 @@
         "Race/ethnicity unknown": 6,
         "White": 10
       },
-      "gr_race": {}
+      "gr_race": {},
+      "o_ug_exc": 0,
+      "o_ug_som": 0,
+      "o_ug_non": 266,
+      "o_gr_exc": 0,
+      "o_gr_som": 0,
+      "o_gr_non": 0
     },
     {
       "unitid": 194657,
@@ -4000,7 +4612,13 @@
       "gr_race": {
         "U.S. Nonresident (international)": 2,
         "White": 110
-      }
+      },
+      "o_ug_exc": 0,
+      "o_ug_som": 0,
+      "o_ug_non": 135,
+      "o_gr_exc": 0,
+      "o_gr_som": 0,
+      "o_gr_non": 112
     },
     {
       "unitid": 461768,
@@ -4035,7 +4653,13 @@
         "Race/ethnicity unknown": 2,
         "White": 42
       },
-      "gr_race": {}
+      "gr_race": {},
+      "o_ug_exc": 0,
+      "o_ug_som": 0,
+      "o_ug_non": 241,
+      "o_gr_exc": 0,
+      "o_gr_som": 0,
+      "o_gr_non": 0
     },
     {
       "unitid": 405854,
@@ -4064,7 +4688,13 @@
       "ug_race": {
         "White": 237
       },
-      "gr_race": {}
+      "gr_race": {},
+      "o_ug_exc": 0,
+      "o_ug_som": 0,
+      "o_ug_non": 219,
+      "o_gr_exc": 0,
+      "o_gr_som": 0,
+      "o_gr_non": 0
     },
     {
       "unitid": 196884,
@@ -4099,7 +4729,13 @@
         "U.S. Nonresident (international)": 25,
         "Race/ethnicity unknown": 14,
         "White": 119
-      }
+      },
+      "o_ug_exc": 0,
+      "o_ug_som": 0,
+      "o_ug_non": 0,
+      "o_gr_exc": 24,
+      "o_gr_som": 125,
+      "o_gr_non": 80
     },
     {
       "unitid": 449685,
@@ -4132,7 +4768,13 @@
         "Race/ethnicity unknown": 18,
         "White": 3
       },
-      "gr_race": {}
+      "gr_race": {},
+      "o_ug_exc": 0,
+      "o_ug_som": 0,
+      "o_ug_non": 216,
+      "o_gr_exc": 0,
+      "o_gr_som": 0,
+      "o_gr_non": 0
     },
     {
       "unitid": 188678,
@@ -4168,7 +4810,13 @@
         "Race/ethnicity unknown": 5,
         "White": 81
       },
-      "gr_race": {}
+      "gr_race": {},
+      "o_ug_exc": 0,
+      "o_ug_som": 0,
+      "o_ug_non": 209,
+      "o_gr_exc": 0,
+      "o_gr_som": 0,
+      "o_gr_non": 0
     },
     {
       "unitid": 457800,
@@ -4203,7 +4851,13 @@
         "Race/ethnicity unknown": 10,
         "White": 22
       },
-      "gr_race": {}
+      "gr_race": {},
+      "o_ug_exc": 0,
+      "o_ug_som": 0,
+      "o_ug_non": 201,
+      "o_gr_exc": 0,
+      "o_gr_som": 0,
+      "o_gr_non": 0
     },
     {
       "unitid": 481094,
@@ -4236,7 +4890,13 @@
         "Hispanic": 13,
         "Race/ethnicity unknown": 37,
         "White": 49
-      }
+      },
+      "o_ug_exc": 0,
+      "o_ug_som": 0,
+      "o_ug_non": 0,
+      "o_gr_exc": 19,
+      "o_gr_som": 0,
+      "o_gr_non": 180
     },
     {
       "unitid": 375230,
@@ -4265,7 +4925,13 @@
       "ug_race": {
         "White": 196
       },
-      "gr_race": {}
+      "gr_race": {},
+      "o_ug_exc": 0,
+      "o_ug_som": 0,
+      "o_ug_non": 196,
+      "o_gr_exc": 0,
+      "o_gr_som": 0,
+      "o_gr_non": 0
     },
     {
       "unitid": 493600,
@@ -4294,7 +4960,13 @@
       "ug_race": {
         "White": 175
       },
-      "gr_race": {}
+      "gr_race": {},
+      "o_ug_exc": 0,
+      "o_ug_som": 0,
+      "o_ug_non": 175,
+      "o_gr_exc": 0,
+      "o_gr_som": 0,
+      "o_gr_non": 0
     },
     {
       "unitid": 494737,
@@ -4323,7 +4995,13 @@
       "ug_race": {
         "White": 171
       },
-      "gr_race": {}
+      "gr_race": {},
+      "o_ug_exc": 0,
+      "o_ug_som": 0,
+      "o_ug_non": 171,
+      "o_gr_exc": 0,
+      "o_gr_som": 0,
+      "o_gr_non": 0
     },
     {
       "unitid": 188696,
@@ -4358,7 +5036,13 @@
         "U.S. Nonresident (international)": 56,
         "White": 65
       },
-      "gr_race": {}
+      "gr_race": {},
+      "o_ug_exc": 0,
+      "o_ug_som": 0,
+      "o_ug_non": 166,
+      "o_gr_exc": 0,
+      "o_gr_som": 0,
+      "o_gr_non": 0
     },
     {
       "unitid": 444413,
@@ -4390,7 +5074,13 @@
       },
       "gr_race": {
         "White": 17
-      }
+      },
+      "o_ug_exc": 0,
+      "o_ug_som": 0,
+      "o_ug_non": 147,
+      "o_gr_exc": 0,
+      "o_gr_som": 0,
+      "o_gr_non": 17
     },
     {
       "unitid": 480028,
@@ -4425,7 +5115,13 @@
         "U.S. Nonresident (international)": 16,
         "White": 40
       },
-      "gr_race": {}
+      "gr_race": {},
+      "o_ug_exc": 0,
+      "o_ug_som": 0,
+      "o_ug_non": 157,
+      "o_gr_exc": 0,
+      "o_gr_som": 0,
+      "o_gr_non": 0
     },
     {
       "unitid": 491446,
@@ -4454,7 +5150,13 @@
       "ug_race": {
         "White": 159
       },
-      "gr_race": {}
+      "gr_race": {},
+      "o_ug_exc": 0,
+      "o_ug_som": 0,
+      "o_ug_non": 159,
+      "o_gr_exc": 0,
+      "o_gr_som": 0,
+      "o_gr_non": 0
     },
     {
       "unitid": 197601,
@@ -4485,7 +5187,13 @@
       },
       "gr_race": {
         "White": 32
-      }
+      },
+      "o_ug_exc": 0,
+      "o_ug_som": 0,
+      "o_ug_non": 122,
+      "o_gr_exc": 0,
+      "o_gr_som": 0,
+      "o_gr_non": 32
     },
     {
       "unitid": 405058,
@@ -4515,7 +5223,13 @@
         "U.S. Nonresident (international)": 1,
         "White": 148
       },
-      "gr_race": {}
+      "gr_race": {},
+      "o_ug_exc": 0,
+      "o_ug_som": 0,
+      "o_ug_non": 149,
+      "o_gr_exc": 0,
+      "o_gr_som": 0,
+      "o_gr_non": 0
     },
     {
       "unitid": 191311,
@@ -4549,7 +5263,13 @@
         "Race/ethnicity unknown": 18,
         "White": 38
       },
-      "gr_race": {}
+      "gr_race": {},
+      "o_ug_exc": 0,
+      "o_ug_som": 0,
+      "o_ug_non": 149,
+      "o_gr_exc": 0,
+      "o_gr_som": 0,
+      "o_gr_non": 0
     },
     {
       "unitid": 188650,
@@ -4581,7 +5301,13 @@
         "Hispanic": 43,
         "Race/ethnicity unknown": 4
       },
-      "gr_race": {}
+      "gr_race": {},
+      "o_ug_exc": 0,
+      "o_ug_som": 0,
+      "o_ug_non": 148,
+      "o_gr_exc": 0,
+      "o_gr_som": 0,
+      "o_gr_non": 0
     },
     {
       "unitid": 383765,
@@ -4615,7 +5341,13 @@
         "Race/ethnicity unknown": 6,
         "White": 15
       },
-      "gr_race": {}
+      "gr_race": {},
+      "o_ug_exc": 0,
+      "o_ug_som": 0,
+      "o_ug_non": 148,
+      "o_gr_exc": 0,
+      "o_gr_som": 0,
+      "o_gr_non": 0
     },
     {
       "unitid": 482194,
@@ -4650,7 +5382,13 @@
         "Race/ethnicity unknown": 4,
         "White": 69
       },
-      "gr_race": {}
+      "gr_race": {},
+      "o_ug_exc": 0,
+      "o_ug_som": 0,
+      "o_ug_non": 144,
+      "o_gr_exc": 0,
+      "o_gr_som": 0,
+      "o_gr_non": 0
     },
     {
       "unitid": 491774,
@@ -4683,7 +5421,13 @@
         "Native Hawaiian / Pacific Islander": 4,
         "White": 3
       },
-      "gr_race": {}
+      "gr_race": {},
+      "o_ug_exc": 0,
+      "o_ug_som": 0,
+      "o_ug_non": 144,
+      "o_gr_exc": 0,
+      "o_gr_som": 0,
+      "o_gr_non": 0
     },
     {
       "unitid": 192624,
@@ -4713,7 +5457,13 @@
         "U.S. Nonresident (international)": 6,
         "White": 136
       },
-      "gr_race": {}
+      "gr_race": {},
+      "o_ug_exc": 0,
+      "o_ug_som": 0,
+      "o_ug_non": 142,
+      "o_gr_exc": 0,
+      "o_gr_som": 0,
+      "o_gr_non": 0
     },
     {
       "unitid": 193894,
@@ -4747,7 +5497,13 @@
         "Hispanic": 16,
         "Race/ethnicity unknown": 44,
         "White": 8
-      }
+      },
+      "o_ug_exc": 0,
+      "o_ug_som": 0,
+      "o_ug_non": 0,
+      "o_gr_exc": 140,
+      "o_gr_som": 0,
+      "o_gr_non": 0
     },
     {
       "unitid": 189477,
@@ -4783,7 +5539,13 @@
         "Race/ethnicity unknown": 3,
         "White": 6
       },
-      "gr_race": {}
+      "gr_race": {},
+      "o_ug_exc": 0,
+      "o_ug_som": 0,
+      "o_ug_non": 139,
+      "o_gr_exc": 0,
+      "o_gr_som": 0,
+      "o_gr_non": 0
     },
     {
       "unitid": 449311,
@@ -4817,7 +5579,13 @@
         "Race/ethnicity unknown": 1,
         "White": 1
       },
-      "gr_race": {}
+      "gr_race": {},
+      "o_ug_exc": 0,
+      "o_ug_som": 0,
+      "o_ug_non": 139,
+      "o_gr_exc": 0,
+      "o_gr_som": 0,
+      "o_gr_non": 0
     },
     {
       "unitid": 193247,
@@ -4850,7 +5618,13 @@
       "gr_race": {
         "U.S. Nonresident (international)": 1,
         "White": 23
-      }
+      },
+      "o_ug_exc": 0,
+      "o_ug_som": 0,
+      "o_ug_non": 115,
+      "o_gr_exc": 0,
+      "o_gr_som": 0,
+      "o_gr_non": 24
     },
     {
       "unitid": 189404,
@@ -4885,7 +5659,13 @@
         "Race/ethnicity unknown": 1,
         "White": 23
       },
-      "gr_race": {}
+      "gr_race": {},
+      "o_ug_exc": 0,
+      "o_ug_som": 0,
+      "o_ug_non": 137,
+      "o_gr_exc": 0,
+      "o_gr_som": 0,
+      "o_gr_non": 0
     },
     {
       "unitid": 197647,
@@ -4918,7 +5698,13 @@
       "gr_race": {
         "U.S. Nonresident (international)": 3,
         "White": 23
-      }
+      },
+      "o_ug_exc": 0,
+      "o_ug_som": 0,
+      "o_ug_non": 111,
+      "o_gr_exc": 0,
+      "o_gr_som": 0,
+      "o_gr_non": 26
     },
     {
       "unitid": 190239,
@@ -4953,7 +5739,13 @@
         "Race/ethnicity unknown": 50,
         "White": 4
       },
-      "gr_race": {}
+      "gr_race": {},
+      "o_ug_exc": 0,
+      "o_ug_som": 0,
+      "o_ug_non": 131,
+      "o_gr_exc": 0,
+      "o_gr_som": 0,
+      "o_gr_non": 0
     },
     {
       "unitid": 427308,
@@ -4983,7 +5775,13 @@
         "Asian": 95,
         "White": 34
       },
-      "gr_race": {}
+      "gr_race": {},
+      "o_ug_exc": 0,
+      "o_ug_som": 0,
+      "o_ug_non": 129,
+      "o_gr_exc": 0,
+      "o_gr_som": 0,
+      "o_gr_non": 0
     },
     {
       "unitid": 486026,
@@ -5012,7 +5810,13 @@
       "ug_race": {
         "White": 127
       },
-      "gr_race": {}
+      "gr_race": {},
+      "o_ug_exc": 0,
+      "o_ug_som": 0,
+      "o_ug_non": 127,
+      "o_gr_exc": 0,
+      "o_gr_som": 0,
+      "o_gr_non": 0
     },
     {
       "unitid": 448071,
@@ -5047,7 +5851,13 @@
         "Race/ethnicity unknown": 9,
         "White": 30
       },
-      "gr_race": {}
+      "gr_race": {},
+      "o_ug_exc": 0,
+      "o_ug_som": 0,
+      "o_ug_non": 126,
+      "o_gr_exc": 0,
+      "o_gr_som": 0,
+      "o_gr_non": 0
     },
     {
       "unitid": 189219,
@@ -5079,7 +5889,13 @@
         "Hispanic": 44,
         "White": 25
       },
-      "gr_race": {}
+      "gr_race": {},
+      "o_ug_exc": 0,
+      "o_ug_som": 0,
+      "o_ug_non": 122,
+      "o_gr_exc": 0,
+      "o_gr_som": 0,
+      "o_gr_non": 0
     },
     {
       "unitid": 457794,
@@ -5110,7 +5926,13 @@
         "Hispanic": 14,
         "White": 65
       },
-      "gr_race": {}
+      "gr_race": {},
+      "o_ug_exc": 0,
+      "o_ug_som": 0,
+      "o_ug_non": 118,
+      "o_gr_exc": 0,
+      "o_gr_som": 0,
+      "o_gr_non": 0
     },
     {
       "unitid": 246789,
@@ -5144,7 +5966,13 @@
         "Hispanic": 2,
         "U.S. Nonresident (international)": 52,
         "White": 26
-      }
+      },
+      "o_ug_exc": 0,
+      "o_ug_som": 0,
+      "o_ug_non": 0,
+      "o_gr_exc": 86,
+      "o_gr_som": 7,
+      "o_gr_non": 24
     },
     {
       "unitid": 484871,
@@ -5173,7 +6001,13 @@
       "ug_race": {
         "White": 115
       },
-      "gr_race": {}
+      "gr_race": {},
+      "o_ug_exc": 0,
+      "o_ug_som": 0,
+      "o_ug_non": 115,
+      "o_gr_exc": 0,
+      "o_gr_som": 0,
+      "o_gr_non": 0
     },
     {
       "unitid": 493798,
@@ -5202,7 +6036,13 @@
       "ug_race": {
         "White": 114
       },
-      "gr_race": {}
+      "gr_race": {},
+      "o_ug_exc": 0,
+      "o_ug_som": 0,
+      "o_ug_non": 114,
+      "o_gr_exc": 0,
+      "o_gr_som": 0,
+      "o_gr_non": 0
     },
     {
       "unitid": 189255,
@@ -5234,7 +6074,13 @@
         "Hispanic": 25,
         "White": 49
       },
-      "gr_race": {}
+      "gr_race": {},
+      "o_ug_exc": 0,
+      "o_ug_som": 0,
+      "o_ug_non": 110,
+      "o_gr_exc": 0,
+      "o_gr_som": 0,
+      "o_gr_non": 0
     },
     {
       "unitid": 366368,
@@ -5268,7 +6114,13 @@
         "U.S. Nonresident (international)": 30,
         "Race/ethnicity unknown": 10,
         "White": 44
-      }
+      },
+      "o_ug_exc": 0,
+      "o_ug_som": 0,
+      "o_ug_non": 0,
+      "o_gr_exc": 0,
+      "o_gr_som": 0,
+      "o_gr_non": 104
     },
     {
       "unitid": 485999,
@@ -5297,7 +6149,13 @@
       "ug_race": {
         "White": 91
       },
-      "gr_race": {}
+      "gr_race": {},
+      "o_ug_exc": 0,
+      "o_ug_som": 0,
+      "o_ug_non": 91,
+      "o_gr_exc": 0,
+      "o_gr_som": 0,
+      "o_gr_non": 0
     },
     {
       "unitid": 415987,
@@ -5331,7 +6189,13 @@
         "Hispanic": 21,
         "Race/ethnicity unknown": 8
       },
-      "gr_race": {}
+      "gr_race": {},
+      "o_ug_exc": 0,
+      "o_ug_som": 0,
+      "o_ug_non": 86,
+      "o_gr_exc": 0,
+      "o_gr_som": 0,
+      "o_gr_non": 0
     },
     {
       "unitid": 197692,
@@ -5362,7 +6226,13 @@
       },
       "gr_race": {
         "White": 14
-      }
+      },
+      "o_ug_exc": 0,
+      "o_ug_som": 0,
+      "o_ug_non": 71,
+      "o_gr_exc": 0,
+      "o_gr_som": 0,
+      "o_gr_non": 14
     },
     {
       "unitid": 193070,
@@ -5393,7 +6263,13 @@
       },
       "gr_race": {
         "White": 29
-      }
+      },
+      "o_ug_exc": 0,
+      "o_ug_som": 0,
+      "o_ug_non": 52,
+      "o_gr_exc": 0,
+      "o_gr_som": 0,
+      "o_gr_non": 29
     },
     {
       "unitid": 431983,
@@ -5422,7 +6298,13 @@
       "ug_race": {
         "White": 74
       },
-      "gr_race": {}
+      "gr_race": {},
+      "o_ug_exc": 0,
+      "o_ug_som": 0,
+      "o_ug_non": 74,
+      "o_gr_exc": 0,
+      "o_gr_som": 0,
+      "o_gr_non": 0
     },
     {
       "unitid": 189273,
@@ -5451,7 +6333,13 @@
       "ug_race": {
         "White": 74
       },
-      "gr_race": {}
+      "gr_race": {},
+      "o_ug_exc": 0,
+      "o_ug_som": 0,
+      "o_ug_non": 74,
+      "o_gr_exc": 0,
+      "o_gr_som": 0,
+      "o_gr_non": 0
     },
     {
       "unitid": 427335,
@@ -5483,7 +6371,13 @@
         "Race/ethnicity unknown": 5,
         "White": 15
       },
-      "gr_race": {}
+      "gr_race": {},
+      "o_ug_exc": 0,
+      "o_ug_som": 0,
+      "o_ug_non": 74,
+      "o_gr_exc": 0,
+      "o_gr_som": 0,
+      "o_gr_non": 0
     },
     {
       "unitid": 490346,
@@ -5512,7 +6406,13 @@
       "ug_race": {
         "White": 73
       },
-      "gr_race": {}
+      "gr_race": {},
+      "o_ug_exc": 0,
+      "o_ug_som": 0,
+      "o_ug_non": 73,
+      "o_gr_exc": 0,
+      "o_gr_som": 0,
+      "o_gr_non": 0
     },
     {
       "unitid": 457855,
@@ -5546,7 +6446,13 @@
         "Race/ethnicity unknown": 8,
         "White": 38
       },
-      "gr_race": {}
+      "gr_race": {},
+      "o_ug_exc": 0,
+      "o_ug_som": 0,
+      "o_ug_non": 73,
+      "o_gr_exc": 0,
+      "o_gr_som": 0,
+      "o_gr_non": 0
     },
     {
       "unitid": 488253,
@@ -5581,7 +6487,13 @@
         "Race/ethnicity unknown": 11,
         "White": 17
       },
-      "gr_race": {}
+      "gr_race": {},
+      "o_ug_exc": 4,
+      "o_ug_som": 0,
+      "o_ug_non": 65,
+      "o_gr_exc": 0,
+      "o_gr_som": 0,
+      "o_gr_non": 0
     },
     {
       "unitid": 188669,
@@ -5614,7 +6526,13 @@
         "U.S. Nonresident (international)": 26,
         "White": 12
       },
-      "gr_race": {}
+      "gr_race": {},
+      "o_ug_exc": 0,
+      "o_ug_som": 0,
+      "o_ug_non": 67,
+      "o_gr_exc": 0,
+      "o_gr_som": 0,
+      "o_gr_non": 0
     },
     {
       "unitid": 196583,
@@ -5644,7 +6562,13 @@
         "U.S. Nonresident (international)": 3,
         "White": 64
       },
-      "gr_race": {}
+      "gr_race": {},
+      "o_ug_exc": 0,
+      "o_ug_som": 0,
+      "o_ug_non": 67,
+      "o_gr_exc": 0,
+      "o_gr_som": 0,
+      "o_gr_non": 0
     },
     {
       "unitid": 193609,
@@ -5678,7 +6602,13 @@
         "U.S. Nonresident (international)": 17,
         "White": 25
       },
-      "gr_race": {}
+      "gr_race": {},
+      "o_ug_exc": 0,
+      "o_ug_som": 0,
+      "o_ug_non": 64,
+      "o_gr_exc": 0,
+      "o_gr_som": 0,
+      "o_gr_non": 0
     },
     {
       "unitid": 493664,
@@ -5707,7 +6637,13 @@
       "ug_race": {
         "White": 60
       },
-      "gr_race": {}
+      "gr_race": {},
+      "o_ug_exc": 0,
+      "o_ug_som": 0,
+      "o_ug_non": 60,
+      "o_gr_exc": 0,
+      "o_gr_som": 0,
+      "o_gr_non": 0
     },
     {
       "unitid": 418171,
@@ -5740,7 +6676,13 @@
         "Race/ethnicity unknown": 2,
         "White": 28
       },
-      "gr_race": {}
+      "gr_race": {},
+      "o_ug_exc": 0,
+      "o_ug_som": 0,
+      "o_ug_non": 54,
+      "o_gr_exc": 0,
+      "o_gr_som": 0,
+      "o_gr_non": 0
     },
     {
       "unitid": 455220,
@@ -5773,7 +6715,13 @@
         "Hispanic": 18,
         "White": 14
       },
-      "gr_race": {}
+      "gr_race": {},
+      "o_ug_exc": 0,
+      "o_ug_som": 0,
+      "o_ug_non": 53,
+      "o_gr_exc": 0,
+      "o_gr_som": 0,
+      "o_gr_non": 0
     },
     {
       "unitid": 190752,
@@ -5802,7 +6750,13 @@
       "ug_race": {
         "White": 51
       },
-      "gr_race": {}
+      "gr_race": {},
+      "o_ug_exc": 0,
+      "o_ug_som": 0,
+      "o_ug_non": 51,
+      "o_gr_exc": 0,
+      "o_gr_som": 0,
+      "o_gr_non": 0
     },
     {
       "unitid": 193061,
@@ -5832,7 +6786,13 @@
         "U.S. Nonresident (international)": 3,
         "White": 44
       },
-      "gr_race": {}
+      "gr_race": {},
+      "o_ug_exc": 0,
+      "o_ug_som": 0,
+      "o_ug_non": 47,
+      "o_gr_exc": 0,
+      "o_gr_som": 0,
+      "o_gr_non": 0
     },
     {
       "unitid": 190008,
@@ -5866,7 +6826,13 @@
         "U.S. Nonresident (international)": 3,
         "White": 22
       },
-      "gr_race": {}
+      "gr_race": {},
+      "o_ug_exc": 0,
+      "o_ug_som": 0,
+      "o_ug_non": 43,
+      "o_gr_exc": 0,
+      "o_gr_som": 0,
+      "o_gr_non": 0
     },
     {
       "unitid": 430564,
@@ -5899,7 +6865,13 @@
         "U.S. Nonresident (international)": 1,
         "White": 16
       },
-      "gr_race": {}
+      "gr_race": {},
+      "o_ug_exc": 0,
+      "o_ug_som": 0,
+      "o_ug_non": 36,
+      "o_gr_exc": 0,
+      "o_gr_som": 0,
+      "o_gr_non": 0
     },
     {
       "unitid": 494551,
@@ -5934,7 +6906,13 @@
         "U.S. Nonresident (international)": 8,
         "Race/ethnicity unknown": 1,
         "White": 17
-      }
+      },
+      "o_ug_exc": 0,
+      "o_ug_som": 0,
+      "o_ug_non": 0,
+      "o_gr_exc": 2,
+      "o_gr_som": 0,
+      "o_gr_non": 32
     },
     {
       "unitid": 495165,
@@ -5966,7 +6944,13 @@
         "Hispanic": 11,
         "White": 9
       },
-      "gr_race": {}
+      "gr_race": {},
+      "o_ug_exc": 0,
+      "o_ug_som": 0,
+      "o_ug_non": 32,
+      "o_gr_exc": 0,
+      "o_gr_som": 0,
+      "o_gr_non": 0
     },
     {
       "unitid": 476355,
@@ -6000,7 +6984,13 @@
         "Race/ethnicity unknown": 4,
         "White": 12
       },
-      "gr_race": {}
+      "gr_race": {},
+      "o_ug_exc": 0,
+      "o_ug_som": 0,
+      "o_ug_non": 29,
+      "o_gr_exc": 0,
+      "o_gr_som": 0,
+      "o_gr_non": 0
     },
     {
       "unitid": 488004,
@@ -6030,7 +7020,13 @@
         "U.S. Nonresident (international)": 7,
         "White": 21
       },
-      "gr_race": {}
+      "gr_race": {},
+      "o_ug_exc": 0,
+      "o_ug_som": 0,
+      "o_ug_non": 28,
+      "o_gr_exc": 0,
+      "o_gr_som": 0,
+      "o_gr_non": 0
     },
     {
       "unitid": 487746,
@@ -6060,7 +7056,13 @@
         "U.S. Nonresident (international)": 3,
         "White": 25
       },
-      "gr_race": {}
+      "gr_race": {},
+      "o_ug_exc": 0,
+      "o_ug_som": 0,
+      "o_ug_non": 28,
+      "o_gr_exc": 0,
+      "o_gr_som": 0,
+      "o_gr_non": 0
     },
     {
       "unitid": 495396,
@@ -6092,7 +7094,13 @@
         "Hispanic": 13,
         "White": 2
       },
-      "gr_race": {}
+      "gr_race": {},
+      "o_ug_exc": 0,
+      "o_ug_som": 0,
+      "o_ug_non": 27,
+      "o_gr_exc": 0,
+      "o_gr_som": 0,
+      "o_gr_non": 0
     },
     {
       "unitid": 483841,
@@ -6122,7 +7130,13 @@
         "Asian": 23,
         "Hispanic": 3
       },
-      "gr_race": {}
+      "gr_race": {},
+      "o_ug_exc": 0,
+      "o_ug_som": 0,
+      "o_ug_non": 26,
+      "o_gr_exc": 0,
+      "o_gr_som": 0,
+      "o_gr_non": 0
     },
     {
       "unitid": 486017,
@@ -6152,7 +7166,13 @@
         "U.S. Nonresident (international)": 3,
         "White": 20
       },
-      "gr_race": {}
+      "gr_race": {},
+      "o_ug_exc": 0,
+      "o_ug_som": 0,
+      "o_ug_non": 23,
+      "o_gr_exc": 0,
+      "o_gr_som": 0,
+      "o_gr_non": 0
     },
     {
       "unitid": 192970,
@@ -6184,7 +7204,13 @@
         "Hispanic": 2,
         "White": 7
       },
-      "gr_race": {}
+      "gr_race": {},
+      "o_ug_exc": 0,
+      "o_ug_som": 0,
+      "o_ug_non": 15,
+      "o_gr_exc": 0,
+      "o_gr_som": 0,
+      "o_gr_non": 0
     },
     {
       "unitid": 392354,
@@ -6216,7 +7242,13 @@
         "U.S. Nonresident (international)": 1,
         "White": 7
       },
-      "gr_race": {}
+      "gr_race": {},
+      "o_ug_exc": 0,
+      "o_ug_som": 0,
+      "o_ug_non": 10,
+      "o_gr_exc": 0,
+      "o_gr_som": 0,
+      "o_gr_non": 0
     },
     {
       "unitid": 483850,
@@ -6245,7 +7277,13 @@
       "ug_race": {
         "Asian": 7
       },
-      "gr_race": {}
+      "gr_race": {},
+      "o_ug_exc": 0,
+      "o_ug_som": 0,
+      "o_ug_non": 7,
+      "o_gr_exc": 0,
+      "o_gr_som": 0,
+      "o_gr_non": 0
     }
   ],
   "degree_fields": {

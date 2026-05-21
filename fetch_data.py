@@ -343,6 +343,14 @@ def main():
 
     print("Fetching distance-education (online) data from NCES...")
     dist = load_distance_education()
+
+    # attach each campus's online mix (so the map can drop fully-online students)
+    for c in campuses:
+        d = dist.get(c["unitid"], {})
+        d2, d12 = d.get(2, {}), d.get(12, {})
+        c["o_ug_exc"], c["o_ug_som"], c["o_ug_non"] = d2.get("exc", 0), d2.get("som", 0), d2.get("non", 0)
+        c["o_gr_exc"], c["o_gr_som"], c["o_gr_non"] = d12.get("exc", 0), d12.get("som", 0), d12.get("non", 0)
+
     nyc_units = set(directory.keys())
     online = {
         "year": YEAR,
