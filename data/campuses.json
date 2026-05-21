@@ -6385,5 +6385,89 @@
         "awards": 1
       }
     ]
+  },
+  "city_comparison": {
+    "year": 2022,
+    "cities": [
+      {
+        "city": "New York",
+        "undergrad": 361792,
+        "grad": 141020,
+        "total": 502812,
+        "nyc": true
+      },
+      {
+        "city": "Phoenix",
+        "undergrad": 172915,
+        "grad": 57613,
+        "total": 230528
+      },
+      {
+        "city": "Los Angeles",
+        "undergrad": 127162,
+        "grad": 55944,
+        "total": 183106
+      },
+      {
+        "city": "Chicago",
+        "undergrad": 126103,
+        "grad": 56791,
+        "total": 182894
+      },
+      {
+        "city": "San Diego",
+        "undergrad": 124001,
+        "grad": 46127,
+        "total": 170128
+      },
+      {
+        "city": "Houston",
+        "undergrad": 140598,
+        "grad": 28309,
+        "total": 168907
+      },
+      {
+        "city": "Boston",
+        "undergrad": 92296,
+        "grad": 57922,
+        "total": 150218
+      },
+      {
+        "city": "Atlanta",
+        "undergrad": 89066,
+        "grad": 44691,
+        "total": 133757
+      },
+      {
+        "city": "San Antonio",
+        "undergrad": 117403,
+        "grad": 13519,
+        "total": 130922
+      },
+      {
+        "city": "Philadelphia",
+        "undergrad": 81309,
+        "grad": 47685,
+        "total": 128994
+      },
+      {
+        "city": "Washington, D.C.",
+        "undergrad": 55681,
+        "grad": 44181,
+        "total": 99862
+      },
+      {
+        "city": "Seattle",
+        "undergrad": 59516,
+        "grad": 21754,
+        "total": 81270
+      },
+      {
+        "city": "San Francisco",
+        "undergrad": 52097,
+        "grad": 18451,
+        "total": 70548
+      }
+    ]
   }
 }

@@ -27,16 +27,17 @@
   .stat b,.detail .big .n,.rrow .val b,.keyrow b,.rangeval{font-family:var(--serif);font-variant-numeric:tabular-nums;font-feature-settings:"tnum" 1}
 
   /* ---- masthead ---- */
-  #topbar{position:sticky;top:0;z-index:1200;display:flex;align-items:center;justify-content:space-between;height:62px;padding:0 24px;background:rgba(255,253,248,.82);backdrop-filter:saturate(1.4) blur(10px);border-bottom:1px solid var(--line)}
+  #topbar{position:sticky;top:0;z-index:1200;display:flex;align-items:center;justify-content:space-between;gap:14px;height:78px;padding:0 26px;background:rgba(255,253,248,.85);backdrop-filter:saturate(1.4) blur(10px);border-bottom:1px solid var(--line)}
   #topbar::after{content:"";position:absolute;left:0;right:0;bottom:-1px;height:2px;background:linear-gradient(90deg,var(--ug) 0%,var(--ug) 50%,var(--gr) 50%,var(--gr) 100%)}
-  #topbar .brand{display:flex;align-items:center;gap:11px;font-size:15.5px;font-weight:700;letter-spacing:-.015em;color:var(--ink)}
-  #topbar .brand .mark{width:15px;height:15px;border-radius:4px;background:linear-gradient(135deg,var(--ug),var(--gr));flex:none;box-shadow:0 1px 3px rgba(31,111,235,.4)}
+  #topbar .brand{display:flex;align-items:center;gap:13px;min-width:0;font-size:25px;font-weight:800;letter-spacing:-.025em;line-height:1.05;color:var(--ink)}
+  #topbar .brand .txt{overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+  #topbar .brand .mark{width:20px;height:20px;border-radius:5px;background:linear-gradient(135deg,var(--ug),var(--gr));flex:none;box-shadow:0 2px 5px rgba(31,111,235,.4)}
   #tabs{display:flex;gap:3px;background:var(--panel2);border:1px solid var(--line);border-radius:999px;padding:3px}
   #tabs button{border:0;background:transparent;color:var(--muted);font-family:var(--sans);font-size:13px;font-weight:600;padding:7px 17px;border-radius:999px;cursor:pointer;transition:color .18s,background .18s}
   #tabs button:hover{color:var(--ink)}
   #tabs button.on{background:var(--ink);color:#fff8ec}
   .view{display:none} .view.on{display:block}
-  #app{display:grid;grid-template-columns:344px 1fr;height:calc(100vh - 62px);min-height:480px}
+  #app{display:grid;grid-template-columns:344px 1fr;height:calc(100vh - 78px);min-height:480px}
   /* ---- sidebar ---- */
   #side{overflow-y:auto;border-right:1px solid var(--line);background:var(--panel);padding:22px 22px 46px}
   #side::-webkit-scrollbar{width:10px}
@@ -125,8 +126,11 @@
   .rrow .val{text-align:right;color:var(--muted)}
   .rrow .val b{color:var(--ink);font-weight:600}
   #c-fields .rrow{grid-template-columns:236px 1fr 100px}
+  .rrow.hl{background:linear-gradient(90deg,rgba(31,111,235,.08),rgba(224,86,29,.05));border-radius:9px;margin-left:-8px;margin-right:-8px;padding:3px 8px}
+  .rrow.hl .lab{font-weight:700}
   @media(max-width:760px){
-    #topbar{height:56px;padding:0 16px}
+    #topbar{height:62px;padding:0 16px}
+    #topbar .brand{font-size:18px}
     #app{grid-template-columns:1fr;grid-template-rows:auto auto;height:auto}
     #side{max-height:46vh} #map{height:56vh}
     .cardgrid{grid-template-columns:1fr}
@@ -138,7 +142,7 @@
 </head>
 <body>
 <header id="topbar">
-  <div class="brand"><span class="mark"></span>New York City college campuses</div>
+  <div class="brand"><span class="mark"></span><span class="txt">New York City college campuses</span></div>
   <nav id="tabs">
     <button data-view="map" class="on">Map</button>
     <button data-view="charts">Summary charts</button>
@@ -226,6 +230,7 @@
     <div class="card" id="c-gradshare"></div>
     <div class="card" id="c-women"></div>
     <div class="card wide" id="c-top"></div>
+    <div class="card wide" id="c-cities"></div>
     <div class="card wide" id="c-fields"></div>
   </div>
 </section>
@@ -583,11 +588,30 @@ function renderFields(){
     valueRows(f,maxV,df.total,"#0e7c86"));
 }
 
-fetch("data/campuses.json").then(r=>r.json()).then(d=>{
+// How New York City compares with other U.S. cities (IPEDS, citywide).
+let CITY_DATA=null;
+function renderCities(){
+  const cc=CITY_DATA; if(!cc||!cc.cities) return;
+  const items=cc.cities, maxT=Math.max(...items.map(c=>c.total),1);
+  const rows=items.map(c=>{
+    const w=c.total/maxT*100, ugf=c.total>0?c.undergrad/c.total:0;
+    return `<div class="rrow${c.nyc?' hl':''}"><span class="lab" title="${c.city}">${c.city}</span>
+      <div class="track"><i style="width:${w*ugf}%;background:${COLORS.ug}"></i><i style="width:${w*(1-ugf)}%;background:${COLORS.gr}"></i></div>
+      <span class="val"><b>${fmt(c.total)}</b></span></div>`;
+  }).join("");
+  document.getElementById("c-cities").innerHTML=card(
+    "How New York City compares with other U.S. cities",
+    `Total college enrollment, fall ${cc.year}, city proper - bar split by undergraduate (blue) and graduate / professional (orange). New York City enrolls more students than any other American city. Counts follow each institution's IPEDS city, so places that host large online universities - notably Phoenix (Grand Canyon University, University of Phoenix) - include students who study nationwide.`,
+    rows+`<div class="keyrow"><span><i class="dot" style="background:${COLORS.ug}"></i>Undergraduate</span><span><i class="dot" style="background:${COLORS.gr}"></i>Graduate / prof.</span></div>`);
+}
+
+fetch("data/campuses.json?v=20260521").then(r=>r.json()).then(d=>{
   DATA=d.campuses;
   DEGREE_FIELDS=d.degree_fields;
+  CITY_DATA=d.city_comparison;
   buildFilters();
   render();
+  renderCities();
   renderFields();
   document.getElementById("foot").innerHTML=
     `Source: Urban Institute Education Data Portal (IPEDS fall ${d.year} enrollment) — the most recent year in the federal IPEDS release. `+

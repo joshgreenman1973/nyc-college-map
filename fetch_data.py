@@ -87,6 +87,35 @@ def get(url):
     raise RuntimeError(f"failed: {url}")
 
 
+def get_all(url):
+    """Follow pagination, returning all result rows."""
+    out, u = [], url
+    while u:
+        d = get(u)
+        out += d.get("results", [])
+        u = d.get("next")
+    return out
+
+
+# Major U.S. cities to compare against New York City, defined city-proper by
+# the IPEDS mailing-address city (NYC itself is the five-borough total).
+# (label, state FIPS, [exact lowercase city strings])
+COMPARE_CITIES = [
+    ("Los Angeles", 6, ["los angeles"]),
+    ("Chicago", 17, ["chicago"]),
+    ("Houston", 48, ["houston"]),
+    ("Phoenix", 4, ["phoenix"]),
+    ("Philadelphia", 42, ["philadelphia"]),
+    ("San Antonio", 48, ["san antonio"]),
+    ("San Diego", 6, ["san diego"]),
+    ("Boston", 25, ["boston"]),
+    ("Washington, D.C.", 11, ["washington"]),
+    ("San Francisco", 6, ["san francisco"]),
+    ("Atlanta", 13, ["atlanta"]),
+    ("Seattle", 53, ["seattle"]),
+]
+
+
 def fetch_directory():
     """Institution directory (name, location, control) for the 5 boroughs."""
     out = {}
@@ -190,6 +219,40 @@ def fetch_degree_fields(nyc_unitids):
     return {"year": DEGREE_YEAR, "total": total, "fields": rows}
 
 
+def fetch_city_comparison(nyc_ug, nyc_gr):
+    """Undergraduate and graduate/professional enrollment for major U.S. cities
+    (city-proper, IPEDS fall enrollment), to compare against New York City."""
+    state_dir, state_enr = {}, {}
+
+    def dir_for(st):
+        if st not in state_dir:
+            rows = get_all(f"{BASE}/directory/{YEAR}/?fips={st}")
+            state_dir[st] = {r["unitid"]: (r.get("city") or "").strip().lower() for r in rows}
+        return state_dir[st]
+
+    def enr_for(st, lvl):
+        key = (st, lvl)
+        if key not in state_enr:
+            rows = get_all(f"{BASE}/fall-enrollment/{YEAR}/{lvl}/race/sex/"
+                           f"?fips={st}&race=99&sex=99&ftpt=99&class_level=99&degree_seeking=99")
+            state_enr[key] = {r["unitid"]: (r.get("enrollment_fall") or 0)
+                              for r in rows if (r.get("enrollment_fall") or 0) > 0}
+        return state_enr[key]
+
+    cities = [{"city": "New York", "undergrad": nyc_ug, "grad": nyc_gr,
+               "total": nyc_ug + nyc_gr, "nyc": True}]
+    for label, st, matches in COMPARE_CITIES:
+        d = dir_for(st)
+        units = {u for u, c in d.items() if c in matches}
+        ug_map, gr_map = enr_for(st, 1), enr_for(st, 2)
+        ug = sum(ug_map.get(u, 0) for u in units)
+        gr = sum(gr_map.get(u, 0) for u in units)
+        cities.append({"city": label, "undergrad": ug, "grad": gr, "total": ug + gr})
+        print(f"  {label}: ug={ug:,} gr={gr:,}")
+    cities.sort(key=lambda c: c["total"], reverse=True)
+    return {"year": YEAR, "cities": cities}
+
+
 def main():
     print("Fetching directory...")
     directory = fetch_directory()
@@ -226,6 +289,11 @@ def main():
     print("Fetching graduate / professional degrees by field...")
     degree_fields = fetch_degree_fields(set(directory.keys()))
 
+    tot_ug0 = sum(c["undergrad"] for c in campuses)
+    tot_gr0 = sum(c["grad"] for c in campuses)
+    print("Fetching city comparison (other U.S. cities)...")
+    city_comparison = fetch_city_comparison(tot_ug0, tot_gr0)
+
     os.makedirs(DATA_DIR, exist_ok=True)
     payload = {
         "year": YEAR,
@@ -233,6 +301,7 @@ def main():
         "count": len(campuses),
         "campuses": campuses,
         "degree_fields": degree_fields,
+        "city_comparison": city_comparison,
     }
     out_path = os.path.join(DATA_DIR, "campuses.json")
     with open(out_path, "w") as f:
