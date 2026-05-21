@@ -16,7 +16,13 @@
   *{box-sizing:border-box}
   html,body{margin:0;height:100%}
   body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Helvetica,Arial,sans-serif;color:var(--ink);background:var(--paper)}
-  #app{display:grid;grid-template-columns:340px 1fr;height:100vh}
+  #topbar{position:sticky;top:0;z-index:1200;display:flex;align-items:center;justify-content:space-between;height:50px;padding:0 18px;background:#fff;border-bottom:1px solid var(--line)}
+  #topbar .brand{font-size:14.5px;font-weight:600;letter-spacing:-.01em}
+  #tabs{display:flex;gap:6px}
+  #tabs button{border:1px solid var(--line);background:#fff;color:var(--muted);font-size:13px;padding:6px 15px;border-radius:8px;cursor:pointer;font-weight:500}
+  #tabs button.on{background:var(--ink);color:#fff;border-color:var(--ink)}
+  .view{display:none} .view.on{display:block}
+  #app{display:grid;grid-template-columns:340px 1fr;height:calc(100vh - 50px);min-height:480px}
   /* ---- sidebar ---- */
   #side{overflow-y:auto;border-right:1px solid var(--line);background:var(--panel);padding:20px 20px 40px}
   h1{font-size:19px;line-height:1.25;margin:0 0 4px;letter-spacing:-.01em}
@@ -42,7 +48,7 @@
   .foot{font-size:11px;color:var(--muted);line-height:1.5;border-top:1px solid var(--line);padding-top:12px;margin-top:8px}
   .foot a{color:var(--muted)}
   /* ---- map ---- */
-  #map{height:100vh}
+  #map{height:100%}
   .leaflet-container{background:#dfe3e6}
   /* ---- detail popup ---- */
   .detail{font-family:inherit;width:268px}
@@ -81,27 +87,45 @@
   .rrow .track i{height:100%}
   .rrow .val{text-align:right;color:var(--muted);font-variant-numeric:tabular-nums}
   .rrow .val b{color:var(--ink)}
+  #c-fields .rrow{grid-template-columns:236px 1fr 96px}
   @media(max-width:760px){
-    #app{grid-template-columns:1fr;grid-template-rows:auto 1fr}
-    #side{max-height:42vh} #map{height:58vh}
+    #app{grid-template-columns:1fr;grid-template-rows:auto auto;height:auto}
+    #side{max-height:46vh} #map{height:56vh}
     .cardgrid{grid-template-columns:1fr}
-    .rrow{grid-template-columns:88px 1fr 78px}
+    .rrow,#c-fields .rrow{grid-template-columns:104px 1fr 84px}
   }
 </style>
 </head>
 <body>
+<header id="topbar">
+  <div class="brand">New York City college campuses</div>
+  <nav id="tabs">
+    <button data-view="map" class="on">Map</button>
+    <button data-view="charts">Summary charts</button>
+  </nav>
+</header>
+
+<div id="view-map" class="view on">
 <div id="app">
   <aside id="side">
-    <h1>New York City college campuses</h1>
-    <p class="sub">Fall 2022 enrollment by campus. Circle size shows total students; the ring shows the split between undergraduate and graduate or professional students.</p>
+    <p class="sub" style="margin-top:2px">Fall 2022 enrollment by campus. Circle size shows the number of students; in the default view the ring splits each campus into undergraduate and graduate or professional students.</p>
 
     <div class="stats" id="stats"></div>
+
+    <div class="group">
+      <h2>Show</h2>
+      <div class="seg" id="levelby">
+        <button data-level="all" class="on">All students</button>
+        <button data-level="ug">Undergraduate</button>
+        <button data-level="gr">Graduate</button>
+      </div>
+    </div>
 
     <div class="group">
       <h2>Color campuses by</h2>
       <div class="seg" id="colorby">
         <button data-mode="mix" class="on">Student mix</button>
-        <button data-mode="control">Control type</button>
+        <button data-mode="control">Public / private</button>
       </div>
     </div>
 
@@ -121,17 +145,17 @@
     </div>
 
     <div class="group">
-      <h2>Control</h2>
+      <h2>Public / private</h2>
       <div id="controls"></div>
     </div>
 
     <div class="group">
-      <h2>Minimum total students: <span class="rangeval" id="minval">0</span></h2>
+      <h2>Minimum students shown: <span class="rangeval" id="minval">0</span></h2>
       <input type="range" id="minslider" min="0" max="20000" step="250" value="0" />
     </div>
 
     <div class="group">
-      <h2>Circle size = total students</h2>
+      <h2 id="sizehdr">Circle size = total students</h2>
       <div class="legend-size" id="sizelegend"></div>
     </div>
 
@@ -139,7 +163,9 @@
   </aside>
   <div id="map"></div>
 </div>
+</div>
 
+<div id="view-charts" class="view">
 <section id="charts">
   <div class="head">
     <h2 class="title">Summary charts</h2>
@@ -154,8 +180,10 @@
     <div class="card" id="c-gradshare"></div>
     <div class="card" id="c-women"></div>
     <div class="card wide" id="c-top"></div>
+    <div class="card wide" id="c-fields"></div>
   </div>
 </section>
+</div>
 
 <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
 <script>
@@ -179,27 +207,33 @@ const layer = L.layerGroup().addTo(map);
 const fmt = n => n.toLocaleString("en-US");
 const pct = (a,b) => b>0 ? Math.round(a/b*100) : 0;
 
-let DATA=[], state={mode:"mix", boroughs:new Set(), controls:new Set(), min:0};
+let DATA=[], DEGREE_FIELDS=null, state={mode:"mix", level:"all", boroughs:new Set(), controls:new Set(), min:0};
+
+// the student count currently being mapped, given the level toggle
+function meas(c){ return state.level==="ug" ? c.undergrad : state.level==="gr" ? c.grad : c.total; }
+const levelWord = () => state.level==="ug" ? "undergraduates" : state.level==="gr" ? "graduate students" : "total students";
 
 function radius(total){ return Math.min(56, Math.max(4.5, Math.sqrt(total)*0.30)); } // area ∝ enrollment, capped
 
 function donutIcon(c){
-  const r = radius(c.total), sw = Math.max(3, r*0.42), R = r - sw/2, C = 2*Math.PI*R;
-  const ugFrac = c.total>0 ? c.undergrad/c.total : 0;
-  const box = r*2 + 4;
+  const r = radius(meas(c)), sw = Math.max(3, r*0.42), R = r - sw/2, C = 2*Math.PI*R;
+  const box = r*2 + 4, cx = r+2;
   let ring;
   if(state.mode==="control"){
     const col = COLORS.control[c.control]||"#888";
-    ring = `<circle cx="${r+2}" cy="${r+2}" r="${R}" fill="none" stroke="${col}" stroke-width="${sw}"/>`;
+    ring = `<circle cx="${cx}" cy="${cx}" r="${R}" fill="none" stroke="${col}" stroke-width="${sw}"/>`;
+  } else if(state.level==="ug"){
+    ring = `<circle cx="${cx}" cy="${cx}" r="${R}" fill="none" stroke="${COLORS.ug}" stroke-width="${sw}"/>`;
+  } else if(state.level==="gr"){
+    ring = `<circle cx="${cx}" cy="${cx}" r="${R}" fill="none" stroke="${COLORS.gr}" stroke-width="${sw}"/>`;
   } else {
-    const ugLen = C*ugFrac;
-    ring = `
-      <circle cx="${r+2}" cy="${r+2}" r="${R}" fill="none" stroke="${COLORS.gr}" stroke-width="${sw}"/>
-      <circle cx="${r+2}" cy="${r+2}" r="${R}" fill="none" stroke="${COLORS.ug}" stroke-width="${sw}"
-        stroke-dasharray="${ugLen} ${C-ugLen}" transform="rotate(-90 ${r+2} ${r+2})"/>`;
+    const ugLen = (c.total>0 ? c.undergrad/c.total : 0) * C;
+    ring = `<circle cx="${cx}" cy="${cx}" r="${R}" fill="none" stroke="${COLORS.gr}" stroke-width="${sw}"/>
+      <circle cx="${cx}" cy="${cx}" r="${R}" fill="none" stroke="${COLORS.ug}" stroke-width="${sw}"
+        stroke-dasharray="${ugLen} ${C-ugLen}" transform="rotate(-90 ${cx} ${cx})"/>`;
   }
   const svg = `<svg width="${box}" height="${box}" viewBox="0 0 ${box} ${box}">
-    <circle cx="${r+2}" cy="${r+2}" r="${R}" fill="#ffffff" fill-opacity="0.32"/>
+    <circle cx="${cx}" cy="${cx}" r="${R}" fill="#ffffff" fill-opacity="0.32"/>
     ${ring}</svg>`;
   return L.divIcon({html:svg, className:"campus-donut", iconSize:[box,box], iconAnchor:[box/2,box/2]});
 }
@@ -258,7 +292,8 @@ function detailHTML(c){
 }
 
 function passes(c){
-  return state.boroughs.has(c.borough) && state.controls.has(c.control) && c.total>=state.min;
+  return state.boroughs.has(c.borough) && state.controls.has(c.control)
+    && meas(c)>0 && meas(c)>=state.min;
 }
 
 /* ---------- summary charts ---------- */
@@ -314,7 +349,7 @@ function renderCharts(shown){
   document.getElementById("c-ftpt").innerHTML=card("Full-time vs. part-time","Share of students enrolled full-time",
     ftr("All students",allFt,allPt)
     +`<div class="subhead">By level</div>`+ftr("Undergraduate",ugFt,ugPt)+ftr("Graduate / prof.",grFt,grPt)
-    +`<div class="subhead">By control type</div>`+ftCtrl.map(x=>ftr(x.label,x.ft,x.pt)).join("")
+    +`<div class="subhead">By public / private</div>`+ftCtrl.map(x=>ftr(x.label,x.ft,x.pt)).join("")
     +`<div class="keyrow"><span><i class="dot" style="background:#2e7d57"></i>Full-time</span><span><i class="dot" style="background:#cfe3d8"></i>Part-time</span></div>`);
 
   // Race / ethnicity
@@ -338,7 +373,7 @@ function renderCharts(shown){
   let cAgg=ctrls.map(ct=>{const cs=shown.filter(c=>c.control===ct);
     return {label:ct,undergrad:sum(cs,c=>c.undergrad),grad:sum(cs,c=>c.grad),total:sum(cs,c=>c.total),n:cs.length};}).filter(x=>x.total>0);
   const cMax=Math.max(...cAgg.map(c=>c.total),1);
-  document.getElementById("c-control").innerHTML=card("Students by control type","Bar length = total students; color = level",
+  document.getElementById("c-control").innerHTML=card("Students by public / private","Bar length = total students; color = level",
     rankRows(cAgg,cMax,it=>`<b>${fmt(it.total)}</b> · ${pct(it.total,tAll)}%`)+
     `<div class="keyrow"><span><i class="dot" style="background:${COLORS.ug}"></i>Undergraduate</span><span><i class="dot" style="background:${COLORS.gr}"></i>Graduate / prof.</span></div>`);
 
@@ -366,20 +401,22 @@ function renderCharts(shown){
 
 function render(){
   layer.clearLayers();
-  const shown = DATA.filter(passes).sort((a,b)=>b.total-a.total);
+  const shown = DATA.filter(passes).sort((a,b)=>meas(b)-meas(a));
   shown.forEach(c=>{
     L.marker([c.lat,c.lon],{icon:donutIcon(c)})
       .bindPopup(detailHTML(c),{maxWidth:300})
-      .bindTooltip(`${c.name} — ${fmt(c.total)} students`)
+      .bindTooltip(`${c.name} — ${fmt(meas(c))} ${levelWord()}`)
       .addTo(layer);
   });
   // stats
-  const sUg=shown.reduce((s,c)=>s+c.undergrad,0), sGr=shown.reduce((s,c)=>s+c.grad,0);
+  const sUg=sum(shown,c=>c.undergrad), sGr=sum(shown,c=>c.grad), sMeas=sum(shown,c=>meas(c));
+  const measLabel = state.level==="ug" ? "undergraduates shown" : state.level==="gr" ? "graduate students shown" : "total students";
   document.getElementById("stats").innerHTML=`
     <div class="stat"><b>${fmt(shown.length)}</b><span>campuses shown</span></div>
-    <div class="stat"><b>${fmt(sUg+sGr)}</b><span>total students</span></div>
+    <div class="stat"><b>${fmt(sMeas)}</b><span>${measLabel}</span></div>
     <div class="stat ug"><b>${fmt(sUg)}</b><span>undergraduate</span></div>
     <div class="stat gr"><b>${fmt(sGr)}</b><span>graduate / prof.</span></div>`;
+  document.getElementById("sizehdr").textContent = "Circle size = " + levelWord();
   renderCharts(shown);
 }
 
@@ -407,6 +444,21 @@ function buildFilters(){
     render();
   });
 
+  document.querySelectorAll('#levelby button').forEach(btn=>btn.onclick=()=>{
+    document.querySelectorAll('#levelby button').forEach(b=>b.classList.toggle('on', b===btn));
+    state.level=btn.dataset.level; render();
+  });
+
+  // tab switching (Map / Summary charts) — avoids the map trapping the scroll wheel
+  document.querySelectorAll('#tabs button').forEach(btn=>btn.onclick=()=>{
+    const t=btn.dataset.view;
+    document.querySelectorAll('#tabs button').forEach(b=>b.classList.toggle('on', b===btn));
+    document.getElementById('view-map').classList.toggle('on', t==='map');
+    document.getElementById('view-charts').classList.toggle('on', t==='charts');
+    if(t==='map') setTimeout(()=>map.invalidateSize(),30);
+    window.scrollTo(0,0);
+  });
+
   const slider=document.getElementById("minslider");
   slider.oninput=e=>{state.min=+e.target.value; document.getElementById("minval").textContent=fmt(state.min); render();};
 
@@ -418,13 +470,36 @@ function buildFilters(){
   }).join("");
 }
 
+// Citywide graduate/professional degrees conferred by field (IPEDS completions).
+function valueRows(items,maxV,total,color){
+  return items.map(it=>{
+    const w=maxV>0?it.awards/maxV*100:0;
+    return `<div class="rrow"><span class="lab" title="${it.field}">${it.field}</span>
+      <div class="track"><i style="width:${w}%;background:${color}"></i></div>
+      <span class="val"><b>${fmt(it.awards)}</b> · ${pct(it.awards,total)}%</span></div>`;
+  }).join("");
+}
+function renderFields(){
+  const df=DEGREE_FIELDS; if(!df||!df.fields) return;
+  let f=df.fields.slice(); const TOPN=14;
+  if(f.length>TOPN){ const rest=f.slice(TOPN).reduce((s,x)=>s+x.awards,0);
+    f=f.slice(0,TOPN); f.push({field:"All other fields",awards:rest}); }
+  const maxV=Math.max(...f.map(x=>x.awards),1);
+  document.getElementById("c-fields").innerHTML=card(
+    "Graduate and professional degrees by field of study",
+    `Degrees conferred citywide, ${df.year} (${fmt(df.total)} total) — from IPEDS completions, a proxy for the mix of professional and graduate programs (law, medicine, business, education and so on). This view is citywide and does not change with the filters.`,
+    valueRows(f,maxV,df.total,"#0e7c86"));
+}
+
 fetch("data/campuses.json").then(r=>r.json()).then(d=>{
   DATA=d.campuses;
+  DEGREE_FIELDS=d.degree_fields;
   buildFilters();
   render();
+  renderFields();
   document.getElementById("foot").innerHTML=
-    `Source: Urban Institute Education Data Portal (IPEDS fall ${d.year} enrollment). `+
-    `${d.count} degree- and non-degree-granting institutions with a New York City address and reported enrollment. `+
+    `Source: Urban Institute Education Data Portal (IPEDS fall ${d.year} enrollment) — the most recent year in the federal IPEDS release. `+
+    `${d.count} institutions with a New York City address and reported enrollment. `+
     `See <a href="methodology.html">methodology</a>.`;
 });
 </script>

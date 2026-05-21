@@ -48,6 +48,33 @@ RACE = {
 
 LEVELS = {1: "undergrad", 2: "grad"}  # 1 = Undergraduate, 2 = Graduate/professional
 
+# IPEDS completions: Urban Institute award_level codes (validated against known
+# single-field schools). Graduate / professional DEGREE levels only:
+GRAD_AWARD_LEVELS = {9: "Master's", 22: "Doctorate (research)",
+                     23: "Doctorate (professional practice)", 24: "Doctorate (other)"}
+DEGREE_YEAR = 2022  # IPEDS completions collection (degrees conferred)
+
+# CIP 2-digit family -> field-of-study label (the "type of professional school")
+CIP_FAMILY = {
+    1: "Agriculture", 3: "Natural resources", 4: "Architecture",
+    5: "Area, ethnic & gender studies", 9: "Communication & journalism",
+    10: "Communications technology", 11: "Computer & information sciences",
+    12: "Personal & culinary services", 13: "Education", 14: "Engineering",
+    15: "Engineering technology", 16: "Foreign languages & linguistics",
+    19: "Family & consumer sciences", 22: "Law & legal studies",
+    23: "English language & literature", 24: "Liberal arts & humanities",
+    25: "Library science", 26: "Biological & biomedical sciences",
+    27: "Mathematics & statistics", 29: "Military sciences",
+    30: "Multi / interdisciplinary studies", 31: "Parks, recreation & fitness",
+    38: "Philosophy & religious studies", 39: "Theology & religious vocations",
+    40: "Physical sciences", 41: "Science technologies", 42: "Psychology",
+    43: "Homeland security & law enforcement",
+    44: "Public administration & social work", 45: "Social sciences",
+    49: "Transportation", 50: "Visual & performing arts",
+    51: "Health professions & medicine", 52: "Business & management",
+    54: "History", 60: "Health residency programs",
+}
+
 
 def get(url):
     for attempt in range(4):
@@ -138,6 +165,31 @@ def fetch_level(level):
     return per
 
 
+def fetch_degree_fields(nyc_unitids):
+    """Citywide graduate/professional degrees conferred, grouped by CIP field.
+    Source: IPEDS completions (degrees awarded), not enrollment."""
+    fields = {}
+    total = 0
+    for lvl in GRAD_AWARD_LEVELS:
+        url = (f"{BASE}/completions-cip-2/{DEGREE_YEAR}/"
+               f"?fips=36&race=99&sex=99&majornum=1&award_level={lvl}")
+        for r in get(url)["results"]:
+            if r["unitid"] not in nyc_unitids:
+                continue
+            cip = r.get("cipcode")
+            awards = r.get("awards") or 0
+            if awards <= 0 or cip in (None, 990000, 99):
+                continue  # skip the all-fields total row
+            family = int(cip // 10000)
+            label = CIP_FAMILY.get(family, "Other fields")
+            fields[label] = fields.get(label, 0) + awards
+            total += awards
+    rows = sorted(({"field": k, "awards": v} for k, v in fields.items()),
+                  key=lambda x: x["awards"], reverse=True)
+    print(f"degree fields: {len(rows)} fields, {total:,} graduate/professional degrees ({DEGREE_YEAR})")
+    return {"year": DEGREE_YEAR, "total": total, "fields": rows}
+
+
 def main():
     print("Fetching directory...")
     directory = fetch_directory()
@@ -171,12 +223,16 @@ def main():
 
     campuses.sort(key=lambda c: c["total"], reverse=True)
 
+    print("Fetching graduate / professional degrees by field...")
+    degree_fields = fetch_degree_fields(set(directory.keys()))
+
     os.makedirs(DATA_DIR, exist_ok=True)
     payload = {
         "year": YEAR,
         "source": "Urban Institute Education Data Portal (IPEDS fall enrollment)",
         "count": len(campuses),
         "campuses": campuses,
+        "degree_fields": degree_fields,
     }
     out_path = os.path.join(DATA_DIR, "campuses.json")
     with open(out_path, "w") as f:

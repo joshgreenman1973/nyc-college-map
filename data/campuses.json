@@ -6247,5 +6247,143 @@
       },
       "gr_race": {}
     }
-  ]
+  ],
+  "degree_fields": {
+    "year": 2022,
+    "total": 53148,
+    "fields": [
+      {
+        "field": "Education",
+        "awards": 7841
+      },
+      {
+        "field": "Business & management",
+        "awards": 7717
+      },
+      {
+        "field": "Health professions & medicine",
+        "awards": 7364
+      },
+      {
+        "field": "Law & legal studies",
+        "awards": 4589
+      },
+      {
+        "field": "Public administration & social work",
+        "awards": 4162
+      },
+      {
+        "field": "Computer & information sciences",
+        "awards": 3224
+      },
+      {
+        "field": "Visual & performing arts",
+        "awards": 2563
+      },
+      {
+        "field": "Engineering",
+        "awards": 1824
+      },
+      {
+        "field": "Biological & biomedical sciences",
+        "awards": 1769
+      },
+      {
+        "field": "Psychology",
+        "awards": 1751
+      },
+      {
+        "field": "Social sciences",
+        "awards": 1716
+      },
+      {
+        "field": "Multi / interdisciplinary studies",
+        "awards": 1610
+      },
+      {
+        "field": "Communication & journalism",
+        "awards": 1207
+      },
+      {
+        "field": "Architecture",
+        "awards": 975
+      },
+      {
+        "field": "Mathematics & statistics",
+        "awards": 941
+      },
+      {
+        "field": "English language & literature",
+        "awards": 601
+      },
+      {
+        "field": "Homeland security & law enforcement",
+        "awards": 447
+      },
+      {
+        "field": "Theology & religious vocations",
+        "awards": 424
+      },
+      {
+        "field": "History",
+        "awards": 389
+      },
+      {
+        "field": "Physical sciences",
+        "awards": 385
+      },
+      {
+        "field": "Foreign languages & linguistics",
+        "awards": 313
+      },
+      {
+        "field": "Philosophy & religious studies",
+        "awards": 250
+      },
+      {
+        "field": "Engineering technology",
+        "awards": 219
+      },
+      {
+        "field": "Area, ethnic & gender studies",
+        "awards": 210
+      },
+      {
+        "field": "Liberal arts & humanities",
+        "awards": 173
+      },
+      {
+        "field": "Library science",
+        "awards": 150
+      },
+      {
+        "field": "Parks, recreation & fitness",
+        "awards": 125
+      },
+      {
+        "field": "Natural resources",
+        "awards": 89
+      },
+      {
+        "field": "Family & consumer sciences",
+        "awards": 84
+      },
+      {
+        "field": "Communications technology",
+        "awards": 17
+      },
+      {
+        "field": "Military sciences",
+        "awards": 11
+      },
+      {
+        "field": "Transportation",
+        "awards": 7
+      },
+      {
+        "field": "Agriculture",
+        "awards": 1
+      }
+    ]
+  }
 }

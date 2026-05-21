@@ -28,7 +28,7 @@
 
   <h2>Data source</h2>
   <p>All enrollment and institution data come from the <a href="https://educationdata.urban.org/" target="_blank" rel="noopener">Urban Institute Education Data Portal</a>, which republishes the U.S. Department of Education's Integrated Postsecondary Education Data System (IPEDS). IPEDS collection is mandatory for any institution that participates in federal student-aid programs.</p>
-  <p>The map uses the <strong>fall 2022</strong> enrollment collection, the most recent year available in the portal's fall-enrollment race/sex table at the time of building (data pulled 2026-05-20). No paid services or API keys were used.</p>
+  <p>The map uses the <strong>fall 2022</strong> enrollment collection. As of when this was built (data pulled 2026-05-20), fall 2022 is the most recent year released in IPEDS for the fall-enrollment race/sex table; fall 2023 figures had not yet been published in this source. This lag is normal for IPEDS — final national enrollment counts are typically released roughly 18 to 24 months after the fall they describe. No paid services or API keys were used.</p>
 
   <h2>Which institutions appear</h2>
   <p>We pulled the IPEDS institutional directory for the five New York City county FIPS codes:</p>
@@ -53,7 +53,7 @@
   <h2>Additional characteristics</h2>
   <p>For each institution the detail card also shows:</p>
   <ul>
-    <li><strong>Control type</strong> from the directory: public, private nonprofit, or private for-profit.</li>
+    <li><strong>Public / private</strong> — the institution's control from the directory: public, private nonprofit, or private for-profit. ("Control" is the IPEDS term for who owns and operates the institution.)</li>
     <li><strong>Full-time share</strong> — full-time headcount (<code>ftpt = 1</code>) divided by total headcount, computed separately for undergraduate and graduate levels.</li>
     <li><strong>Women share</strong> — students reported as women (<code>sex = 2</code>) divided by total, by level. IPEDS collects a binary sex field only.</li>
     <li><strong>Race / ethnicity</strong> — the nine IPEDS categories (White; Black; Hispanic; Asian; American Indian or Alaska Native; Native Hawaiian or Pacific Islander; two or more races; U.S. nonresident; and unknown), summed across undergraduate and graduate students.</li>
@@ -64,8 +64,13 @@
   <ul>
     <li><strong>Circle area is proportional to total enrollment</strong> (radius scales with the square root of the headcount), so a campus with four times as many students draws a circle with roughly four times the area, not four times the radius.</li>
     <li>In "student mix" mode the ring is split into a blue arc (undergraduate) and an orange arc (graduate / professional) proportional to each campus's enrollment.</li>
-    <li>In "control type" mode the ring is a single color for public, private nonprofit, or private for-profit.</li>
+    <li>In "public / private" mode the ring is a single color for public, private nonprofit, or private for-profit.</li>
+    <li>The <strong>"Show"</strong> control switches the map between all students, undergraduate only, and graduate / professional only. In a single-level view, each circle is sized by that level's headcount alone, drawn in one solid color, and campuses with no students at that level drop off the map.</li>
   </ul>
+
+  <h2>Graduate and professional degrees by field of study</h2>
+  <p>The "summary charts" tab includes a citywide breakdown of graduate and professional degrees by field. This comes from a different IPEDS table — <strong>completions</strong> (degrees <em>conferred</em> in the 2021&ndash;22 academic year), not enrollment — because IPEDS does not report fall enrollment by field of study. It is a reasonable proxy for the mix of professional and graduate programs (law, medicine, business, education, public administration / social work, and so on).</p>
+  <p>We sum the graduate and professional degree levels in the Urban Institute completions table — master's (<code>award_level = 9</code>), research doctorate (<code>22</code>), professional-practice doctorate such as the MD, JD or DDS (<code>23</code>), and other doctorate (<code>24</code>) — and group each degree by its two-digit Classification of Instructional Programs (CIP) family. Bachelor's degrees and sub-baccalaureate awards are excluded. These award-level codes were validated against single-field institutions (for example, New York Law School's degrees fall entirely under CIP 22, Law; the Icahn School of Medicine's professional-practice doctorates fall under CIP 51, Health professions). This chart is citywide and does not respond to the map filters.</p>
 
   <h2>Known limitations</h2>
   <ul>
@@ -74,6 +79,7 @@
     <li>Mailing address determines borough. A handful of institutions administered from one borough may operate facilities in another.</li>
     <li>Branch campuses and systems are reported as IPEDS lists them. The City University of New York and the State University of New York colleges appear as separate institutions, not as a single system.</li>
     <li>Small counts may be suppressed or rounded in the underlying federal data.</li>
+    <li>The "degrees by field" chart counts degrees <strong>conferred</strong> in a year, which is not the same as students currently <strong>enrolled</strong> in each field. It is offered as a proxy for program mix, not as a headcount.</li>
   </ul>
 
   <h2>Reproduce it</h2>
