@@ -47,6 +47,8 @@
   .legend-size circle{fill:none;stroke:#9aa3af;stroke-width:1.3}
   .foot{font-size:11px;color:var(--muted);line-height:1.5;border-top:1px solid var(--line);padding-top:12px;margin-top:8px}
   .foot a{color:var(--muted)}
+  .branch-swatch{display:inline-block;width:11px;height:11px;background:#fff;border:1.6px solid var(--ink);transform:rotate(45deg);flex:none}
+  #legend-branch p{font-size:11px;color:var(--muted);margin:5px 0 0;line-height:1.45}
   /* ---- map ---- */
   #map{height:100%}
   .leaflet-container{background:#dfe3e6}
@@ -139,6 +141,11 @@
       <label class="chk"><span class="swatch" style="background:var(--pfp)"></span> Private for-profit</label>
     </div>
 
+    <div class="group" id="legend-branch">
+      <label class="chk"><span class="branch-swatch"></span> &nbsp;Branch campus of a university based outside the city</label>
+      <p>Shown for reference with an asterisk marker. These report enrollment under their parent institution, so they are <em>not</em> in the IPEDS totals or charts. Click a marker to see why.</p>
+    </div>
+
     <div class="group">
       <h2>Borough</h2>
       <div id="boroughs"></div>
@@ -204,7 +211,52 @@ L.tileLayer("https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png",{
 }).addTo(map);
 
 const layer = L.layerGroup().addTo(map);
+const branchLayer = L.layerGroup().addTo(map);
 const fmt = n => n.toLocaleString("en-US");
+
+// Manually curated, NON-IPEDS reference points: New York City campuses of
+// universities based outside the city, whose students IPEDS counts under the
+// parent's home campus (so they are absent from the enrollment data on this map).
+const BRANCH = [
+  {name:"Cornell Tech", parent:"Cornell University", home:"Ithaca, New York",
+   place:"Roosevelt Island, Manhattan", lat:40.7558, lon:-73.9564, level:"gr",
+   size:"a graduate campus (roughly 700 students; self-reported figures vary)",
+   url:"https://tech.cornell.edu/",
+   note:"A graduate campus of Cornell University, which is based in Ithaca and reports all its students - Cornell Tech included - under that upstate campus, so Cornell Tech is not a separate New York City institution in IPEDS. Other examples of the same gap: Northeastern University (based in Boston), which is expanding into the city through its merger with Marymount Manhattan College, and study-away or extension sites of universities such as Syracuse University and Boston University, whose students are counted at their home campuses."},
+  {name:"Bard Graduate Center", parent:"Bard College", home:"Annandale-on-Hudson, New York",
+   place:"38 West 86th Street, Manhattan", lat:40.7864, lon:-73.9706, level:"gr",
+   size:"a small MA and PhD program",
+   url:"https://www.bgc.bard.edu/",
+   note:"A graduate research institute of Bard College, which is based in Annandale-on-Hudson. Its students are reported under Bard's home campus, so it is not a separate New York City institution in IPEDS."}
+];
+
+function branchIcon(){
+  const s=24;
+  const svg=`<svg width="${s}" height="${s}" viewBox="0 0 ${s} ${s}">
+    <polygon points="12,2 22,12 12,22 2,12" fill="#ffffff" stroke="#16181d" stroke-width="2"/>
+    <text x="12" y="16.5" text-anchor="middle" font-size="13" font-weight="700" fill="#16181d">*</text></svg>`;
+  return L.divIcon({html:svg, className:"branch-pin", iconSize:[s,s], iconAnchor:[s/2,s/2]});
+}
+
+function renderBranch(){
+  branchLayer.clearLayers();
+  BRANCH.forEach(b=>{
+    if(state.level==="ug" && b.level==="gr") return;   // hide grad-only sites in undergrad view
+    if(state.level==="gr" && b.level==="ug") return;
+    const popup = `<div class="detail">
+      <h3>${b.name} <span style="color:var(--muted)">*</span></h3>
+      <div class="meta">Branch campus of ${b.parent} &middot; based in ${b.home}<br>${b.place}</div>
+      <div class="row" style="display:block;color:var(--ink)">${b.size.charAt(0).toUpperCase()+b.size.slice(1)}.</div>
+      <div class="secn">Why it is not counted on this map</div>
+      <div class="row" style="display:block;line-height:1.5">${b.note}</div>
+      <div class="row" style="margin-top:8px"><a href="${b.url}" target="_blank" rel="noopener">${b.url.replace(/^https?:\/\//,'').replace(/\/$/,'')}</a></div>
+    </div>`;
+    L.marker([b.lat,b.lon],{icon:branchIcon(),zIndexOffset:1000})
+      .bindPopup(popup,{maxWidth:300})
+      .bindTooltip(`${b.name} (branch campus of ${b.parent} - not in IPEDS totals)`)
+      .addTo(branchLayer);
+  });
+}
 const pct = (a,b) => b>0 ? Math.round(a/b*100) : 0;
 
 let DATA=[], DEGREE_FIELDS=null, state={mode:"mix", level:"all", boroughs:new Set(), controls:new Set(), min:0};
@@ -417,6 +469,7 @@ function render(){
     <div class="stat ug"><b>${fmt(sUg)}</b><span>undergraduate</span></div>
     <div class="stat gr"><b>${fmt(sGr)}</b><span>graduate / prof.</span></div>`;
   document.getElementById("sizehdr").textContent = "Circle size = " + levelWord();
+  renderBranch();
   renderCharts(shown);
 }
 
