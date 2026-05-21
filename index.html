@@ -225,12 +225,14 @@
     <div class="card" id="c-level"></div>
     <div class="card" id="c-ftpt"></div>
     <div class="card wide" id="c-race"></div>
+    <div class="card wide" id="c-online"></div>
     <div class="card" id="c-borough"></div>
     <div class="card" id="c-control"></div>
     <div class="card" id="c-gradshare"></div>
     <div class="card" id="c-women"></div>
     <div class="card wide" id="c-top"></div>
     <div class="card wide" id="c-cities"></div>
+    <div class="card wide" id="c-online-cities"></div>
     <div class="card wide" id="c-fields"></div>
   </div>
 </section>
@@ -588,6 +590,39 @@ function renderFields(){
     valueRows(f,maxV,df.total,"#0e7c86"));
 }
 
+// Online vs. in-person enrollment (IPEDS distance-education data).
+const ONLINE={none:"#2f6f4f", some:"#d6a44d", exc:"#b5462f"};
+let ONLINE_DATA=null;
+function onlineRow(label,o){
+  const t=o.tot||1;
+  return `<div class="rrow"><span class="lab">${label}</span>
+    <div class="track">
+      <i style="width:${o.non/t*100}%;background:${ONLINE.none}"></i>
+      <i style="width:${o.som/t*100}%;background:${ONLINE.some}"></i>
+      <i style="width:${o.exc/t*100}%;background:${ONLINE.exc}"></i>
+    </div><span class="val"><b>${Math.round(o.exc/t*100)}%</b> fully online</span></div>`;
+}
+function renderOnline(){
+  const o=ONLINE_DATA; if(!o) return;
+  document.getElementById("c-online").innerHTML=card(
+    "How New York City students learn: online vs. in person",
+    `Fall ${o.year}. Share of students enrolled in no online courses, some, or exclusively online (distance education). New York City is overwhelmingly in-person - only ${Math.round(o.all.exc/o.all.tot*100)}% study fully online.`,
+    onlineRow("All students",o.all)
+    +`<div class="subhead">By level</div>`+onlineRow("Undergraduate",o.undergrad)+onlineRow("Graduate / prof.",o.grad)
+    +`<div class="keyrow"><span><i class="dot" style="background:${ONLINE.none}"></i>No online courses</span><span><i class="dot" style="background:${ONLINE.some}"></i>Some online</span><span><i class="dot" style="background:${ONLINE.exc}"></i>Fully online</span></div>`);
+}
+function renderOnlineCities(){
+  const cc=CITY_DATA; if(!cc||!cc.cities) return;
+  const items=cc.cities.slice().sort((a,b)=>b.online_pct-a.online_pct);
+  const rows=items.map(c=>`<div class="rrow${c.nyc?' hl':''}"><span class="lab" title="${c.city}">${c.city}</span>
+    <div class="track"><i style="width:${c.online_pct}%;background:${ONLINE.exc}"></i></div>
+    <span class="val"><b>${c.online_pct}%</b></span></div>`).join("");
+  document.getElementById("c-online-cities").innerHTML=card(
+    "Share of students enrolled fully online, by city",
+    `Percent of all students enrolled exclusively in distance-education courses, fall ${cc.year}. New York City (highlighted) is among the most in-person of large U.S. cities; Phoenix and San Diego are dominated by online universities headquartered there, which is why their raw totals above look so large.`,
+    rows);
+}
+
 // How New York City compares with other U.S. cities (IPEDS, citywide).
 let CITY_DATA=null;
 function renderCities(){
@@ -605,13 +640,16 @@ function renderCities(){
     rows+`<div class="keyrow"><span><i class="dot" style="background:${COLORS.ug}"></i>Undergraduate</span><span><i class="dot" style="background:${COLORS.gr}"></i>Graduate / prof.</span></div>`);
 }
 
-fetch("data/campuses.json?v=20260521").then(r=>r.json()).then(d=>{
+fetch("data/campuses.json?v=20260521b").then(r=>r.json()).then(d=>{
   DATA=d.campuses;
   DEGREE_FIELDS=d.degree_fields;
   CITY_DATA=d.city_comparison;
+  ONLINE_DATA=d.online;
   buildFilters();
   render();
+  renderOnline();
   renderCities();
+  renderOnlineCities();
   renderFields();
   document.getElementById("foot").innerHTML=
     `Source: Urban Institute Education Data Portal (IPEDS fall ${d.year} enrollment) — the most recent year in the federal IPEDS release. `+

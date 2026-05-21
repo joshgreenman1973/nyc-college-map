@@ -16,6 +16,9 @@ import urllib.request
 import urllib.error
 import time
 import os
+import io
+import csv
+import zipfile
 
 YEAR = 2022
 BASE = "https://educationdata.urban.org/api/v1/college-university/ipeds"
@@ -95,6 +98,48 @@ def get_all(url):
         out += d.get("results", [])
         u = d.get("next")
     return out
+
+
+# IPEDS Fall Enrollment, Distance Education (EF...A_DIST). EFDELEV: 1 = all
+# students, 2 = undergraduate, 12 = graduate/professional. Columns of interest:
+# EFDETOT total, EFDEEXC enrolled exclusively in distance ed, EFDESOM some,
+# EFDENON none. Distributed by NCES as a downloadable file (not in the Urban API).
+def load_distance_education():
+    url = f"https://nces.ed.gov/ipeds/datacenter/data/EF{YEAR}A_DIST.zip"
+    raw = urllib.request.urlopen(url, timeout=120).read()
+    zf = zipfile.ZipFile(io.BytesIO(raw))
+    names = zf.namelist()
+    fn = next((n for n in names if n.lower().endswith("_rv.csv")), names[0])
+    out = {}
+    with zf.open(fn) as fh:
+        rdr = csv.reader(io.TextIOWrapper(fh, encoding="latin-1"))
+        next(rdr)
+        for row in rdr:
+            try:
+                uid, lev = int(row[0]), int(row[1])
+            except (ValueError, IndexError):
+                continue
+            if lev not in (1, 2, 12):
+                continue
+
+            def n(i):
+                try:
+                    return int(row[i])
+                except (ValueError, IndexError):
+                    return 0
+            out.setdefault(uid, {})[lev] = {"tot": n(3), "exc": n(5), "som": n(7), "non": n(9)}
+    print(f"distance-ed: {len(out)} institutions loaded ({fn})")
+    return out
+
+
+def online_agg(dist, units, lev):
+    a = {"tot": 0, "exc": 0, "som": 0, "non": 0}
+    for u in units:
+        d = dist.get(u, {}).get(lev)
+        if d:
+            for k in a:
+                a[k] += d[k]
+    return a
 
 
 # Major U.S. cities to compare against New York City, defined city-proper by
@@ -219,9 +264,10 @@ def fetch_degree_fields(nyc_unitids):
     return {"year": DEGREE_YEAR, "total": total, "fields": rows}
 
 
-def fetch_city_comparison(nyc_ug, nyc_gr):
+def fetch_city_comparison(nyc_ug, nyc_gr, nyc_excl, nyc_online_tot, dist):
     """Undergraduate and graduate/professional enrollment for major U.S. cities
-    (city-proper, IPEDS fall enrollment), to compare against New York City."""
+    (city-proper, IPEDS fall enrollment), to compare against New York City.
+    Each city also gets its share of students enrolled exclusively online."""
     state_dir, state_enr = {}, {}
 
     def dir_for(st):
@@ -239,16 +285,22 @@ def fetch_city_comparison(nyc_ug, nyc_gr):
                               for r in rows if (r.get("enrollment_fall") or 0) > 0}
         return state_enr[key]
 
+    def online_pct(excl, tot):
+        return round(excl / tot * 100, 1) if tot else 0
+
     cities = [{"city": "New York", "undergrad": nyc_ug, "grad": nyc_gr,
-               "total": nyc_ug + nyc_gr, "nyc": True}]
+               "total": nyc_ug + nyc_gr, "online_excl": nyc_excl,
+               "online_pct": online_pct(nyc_excl, nyc_online_tot), "nyc": True}]
     for label, st, matches in COMPARE_CITIES:
         d = dir_for(st)
         units = {u for u, c in d.items() if c in matches}
         ug_map, gr_map = enr_for(st, 1), enr_for(st, 2)
         ug = sum(ug_map.get(u, 0) for u in units)
         gr = sum(gr_map.get(u, 0) for u in units)
-        cities.append({"city": label, "undergrad": ug, "grad": gr, "total": ug + gr})
-        print(f"  {label}: ug={ug:,} gr={gr:,}")
+        oa = online_agg(dist, units, 1)
+        cities.append({"city": label, "undergrad": ug, "grad": gr, "total": ug + gr,
+                       "online_excl": oa["exc"], "online_pct": online_pct(oa["exc"], oa["tot"])})
+        print(f"  {label}: ug={ug:,} gr={gr:,}  fully online={online_pct(oa['exc'], oa['tot'])}%")
     cities.sort(key=lambda c: c["total"], reverse=True)
     return {"year": YEAR, "cities": cities}
 
@@ -289,10 +341,23 @@ def main():
     print("Fetching graduate / professional degrees by field...")
     degree_fields = fetch_degree_fields(set(directory.keys()))
 
+    print("Fetching distance-education (online) data from NCES...")
+    dist = load_distance_education()
+    nyc_units = set(directory.keys())
+    online = {
+        "year": YEAR,
+        "all": online_agg(dist, nyc_units, 1),
+        "undergrad": online_agg(dist, nyc_units, 2),
+        "grad": online_agg(dist, nyc_units, 12),
+    }
+    oa = online["all"]
+    print(f"  NYC online: {oa['exc']:,} fully online of {oa['tot']:,} "
+          f"({round(oa['exc']/oa['tot']*100,1)}%); some online {oa['som']:,}")
+
     tot_ug0 = sum(c["undergrad"] for c in campuses)
     tot_gr0 = sum(c["grad"] for c in campuses)
     print("Fetching city comparison (other U.S. cities)...")
-    city_comparison = fetch_city_comparison(tot_ug0, tot_gr0)
+    city_comparison = fetch_city_comparison(tot_ug0, tot_gr0, oa["exc"], oa["tot"], dist)
 
     os.makedirs(DATA_DIR, exist_ok=True)
     payload = {
@@ -301,6 +366,7 @@ def main():
         "count": len(campuses),
         "campuses": campuses,
         "degree_fields": degree_fields,
+        "online": online,
         "city_comparison": city_comparison,
     }
     out_path = os.path.join(DATA_DIR, "campuses.json")

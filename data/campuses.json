@@ -6386,6 +6386,27 @@
       }
     ]
   },
+  "online": {
+    "year": 2022,
+    "all": {
+      "tot": 503807,
+      "exc": 72836,
+      "som": 151110,
+      "non": 279861
+    },
+    "undergrad": {
+      "tot": 361917,
+      "exc": 48308,
+      "som": 120178,
+      "non": 193431
+    },
+    "grad": {
+      "tot": 141890,
+      "exc": 24528,
+      "som": 30932,
+      "non": 86430
+    }
+  },
   "city_comparison": {
     "year": 2022,
     "cities": [
@@ -6394,79 +6415,105 @@
         "undergrad": 361792,
         "grad": 141020,
         "total": 502812,
+        "online_excl": 72836,
+        "online_pct": 14.5,
         "nyc": true
       },
       {
         "city": "Phoenix",
         "undergrad": 172915,
         "grad": 57613,
-        "total": 230528
+        "total": 230528,
+        "online_excl": 179771,
+        "online_pct": 78.0
       },
       {
         "city": "Los Angeles",
         "undergrad": 127162,
         "grad": 55944,
-        "total": 183106
+        "total": 183106,
+        "online_excl": 27514,
+        "online_pct": 15.1
       },
       {
         "city": "Chicago",
         "undergrad": 126103,
         "grad": 56791,
-        "total": 182894
+        "total": 182894,
+        "online_excl": 33238,
+        "online_pct": 18.2
       },
       {
         "city": "San Diego",
         "undergrad": 124001,
         "grad": 46127,
-        "total": 170128
+        "total": 170128,
+        "online_excl": 83219,
+        "online_pct": 48.9
       },
       {
         "city": "Houston",
         "undergrad": 140598,
         "grad": 28309,
-        "total": 168907
+        "total": 168907,
+        "online_excl": 35430,
+        "online_pct": 21.0
       },
       {
         "city": "Boston",
         "undergrad": 92296,
         "grad": 57922,
-        "total": 150218
+        "total": 150218,
+        "online_excl": 24401,
+        "online_pct": 16.2
       },
       {
         "city": "Atlanta",
         "undergrad": 89066,
         "grad": 44691,
-        "total": 133757
+        "total": 133757,
+        "online_excl": 36288,
+        "online_pct": 27.1
       },
       {
         "city": "San Antonio",
         "undergrad": 117403,
         "grad": 13519,
-        "total": 130922
+        "total": 130922,
+        "online_excl": 28227,
+        "online_pct": 21.6
       },
       {
         "city": "Philadelphia",
         "undergrad": 81309,
         "grad": 47685,
-        "total": 128994
+        "total": 128994,
+        "online_excl": 22004,
+        "online_pct": 17.1
       },
       {
         "city": "Washington, D.C.",
         "undergrad": 55681,
         "grad": 44181,
-        "total": 99862
+        "total": 99862,
+        "online_excl": 24076,
+        "online_pct": 24.1
       },
       {
         "city": "Seattle",
         "undergrad": 59516,
         "grad": 21754,
-        "total": 81270
+        "total": 81270,
+        "online_excl": 7999,
+        "online_pct": 9.8
       },
       {
         "city": "San Francisco",
         "undergrad": 52097,
         "grad": 18451,
-        "total": 70548
+        "total": 70548,
+        "online_excl": 12911,
+        "online_pct": 18.3
       }
     ]
   }
