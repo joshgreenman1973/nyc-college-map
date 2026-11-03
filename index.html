@@ -653,7 +653,7 @@ function renderOnline(){
   const o=ONLINE_DATA; if(!o) return;
   document.getElementById("c-online").innerHTML=card(
     "How New York City students learn: online vs. in person",
-    `Fall ${o.year}. Share of students enrolled in no online courses, some, or exclusively online (distance education). New York City is overwhelmingly in-person - only ${Math.round(o.all.exc/o.all.tot*100)}% study fully online.`,
+    `Fall ${o.year}. Share of students enrolled in no online courses, some or exclusively online (distance education). New York City is overwhelmingly in-person - only ${Math.round(o.all.exc/o.all.tot*100)}% study fully online.`,
     onlineRow("All students",o.all)
     +`<div class="subhead">By level</div>`+onlineRow("Undergraduate",o.undergrad)+onlineRow("Graduate / prof.",o.grad)
     +`<div class="keyrow"><span><i class="dot" style="background:${ONLINE.none}"></i>No online courses</span><span><i class="dot" style="background:${ONLINE.some}"></i>Some online</span><span><i class="dot" style="background:${ONLINE.exc}"></i>Fully online</span></div>`);
